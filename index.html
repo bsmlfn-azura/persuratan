@@ -35,7 +35,6 @@
             min-height: 100vh;
         }
 
-        /* Pola latar belakang subtle */
         body::before {
             content: '';
             position: fixed;
@@ -50,203 +49,63 @@
 
         h1, h2, h3 { font-family: 'Playfair Display', serif; }
 
-        /* Animasi */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.4); opacity: 0; }
-        }
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-        @keyframes countUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes scaleIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 
         .animate-fade-in-up { animation: fadeInUp 0.5s ease-out both; }
         .animate-slide-in { animation: slideInRight 0.4s ease-out both; }
         .animate-scale-in { animation: scaleIn 0.3s ease-out both; }
-        .animate-float { animation: float 3s ease-in-out infinite; }
-
+        
         .stagger-1 { animation-delay: 0.05s; }
         .stagger-2 { animation-delay: 0.1s; }
         .stagger-3 { animation-delay: 0.15s; }
         .stagger-4 { animation-delay: 0.2s; }
 
-        /* Tab aktif */
-        .tab-btn {
-            position: relative;
-            transition: color 0.3s;
-        }
-        .tab-btn::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--accent);
-            border-radius: 3px 3px 0 0;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        .tab-btn.active { color: var(--primary); font-weight: 700; }
+        .tab-btn { position: relative; transition: color 0.3s; }
+        .tab-btn::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 3px; background: var(--accent); border-radius: 3px 3px 0 0; transform: scaleX(0); transition: transform 0.3s ease; }
+        .tab-btn.active { color: white; font-weight: 700; }
         .tab-btn.active::after { transform: scaleX(1); }
 
-        /* Kartu statistik */
-        .stat-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(22,105,122,0.12);
-        }
+        .stat-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(22,105,122,0.12); }
 
-        /* Tabel */
-        .data-table tbody tr {
-            transition: background 0.2s;
-        }
-        .data-table tbody tr:hover {
-            background: rgba(22,105,122,0.04);
-        }
+        .data-table tbody tr { transition: background 0.2s; }
+        .data-table tbody tr:hover { background: rgba(22,105,122,0.04); }
 
-        /* Tombol utama */
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(22,105,122,0.3);
-        }
-        .btn-primary:active { transform: translateY(0); }
+        .btn-primary { background: var(--primary); color: white; transition: all 0.3s; }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(22,105,122,0.3); }
+        
+        .btn-accent { background: var(--accent); color: white; transition: all 0.3s; }
+        .btn-accent:hover { background: #c08530; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,152,61,0.3); }
 
-        .btn-accent {
-            background: var(--accent);
-            color: white;
-            transition: all 0.3s;
-        }
-        .btn-accent:hover {
-            background: #c08530;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(212,152,61,0.3);
-        }
-
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-            transition: all 0.3s;
-        }
+        .btn-danger { background: var(--danger); color: white; transition: all 0.3s; }
         .btn-danger:hover { background: #a83828; }
 
-        /* Modal */
-        .modal-overlay {
-            backdrop-filter: blur(6px);
-            background: rgba(0,0,0,0.4);
-        }
-        .modal-box {
-            animation: scaleIn 0.3s ease-out;
-        }
+        .modal-overlay { backdrop-filter: blur(6px); background: rgba(0,0,0,0.4); }
+        .modal-box { animation: scaleIn 0.3s ease-out; }
 
-        /* Toast */
-        .toast-item {
-            animation: slideInRight 0.4s ease-out;
-        }
-        .toast-item.removing {
-            animation: slideInRight 0.3s ease-in reverse both;
-        }
+        .toast-item { animation: slideInRight 0.4s ease-out; }
+        .toast-item.removing { animation: slideInRight 0.3s ease-in reverse both; }
 
-        /* Input focus */
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(22,105,122,0.15);
-            outline: none;
-        }
+        .form-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(22,105,122,0.15); outline: none; }
 
-        /* Upload area */
-        .upload-area {
-            border: 2px dashed var(--border);
-            transition: all 0.3s;
-        }
-        .upload-area:hover, .upload-area.dragover {
-            border-color: var(--primary);
-            background: rgba(22,105,122,0.04);
-        }
-        .upload-area.has-file {
-            border-color: var(--success);
-            background: rgba(45,143,78,0.04);
-        }
+        .upload-area { border: 2px dashed var(--border); transition: all 0.3s; }
+        .upload-area:hover, .upload-area.dragover { border-color: var(--primary); background: rgba(22,105,122,0.04); }
+        .upload-area.has-file { border-color: var(--success); background: rgba(45,143,78,0.04); }
 
-        /* Badge */
-        .badge-masuk {
-            background: rgba(22,105,122,0.1);
-            color: var(--masuk);
-        }
-        .badge-keluar {
-            background: rgba(184,114,45,0.1);
-            color: var(--keluar);
-        }
+        .badge-masuk { background: rgba(22,105,122,0.1); color: var(--masuk); }
+        .badge-keluar { background: rgba(184,114,45,0.1); color: var(--keluar); }
 
-        /* Scroll kustom */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-        /* Responsif tabel */
-        .table-wrapper { overflow-x: auto; }
+        .demo-banner { background: linear-gradient(135deg, var(--accent-light), #FFF8E7); border-bottom: 1px solid var(--accent); }
+        .confirm-overlay { backdrop-filter: blur(4px); background: rgba(0,0,0,0.5); }
 
-        /* Banner demo */
-        .demo-banner {
-            background: linear-gradient(135deg, var(--accent-light), #FFF8E7);
-            border-bottom: 1px solid var(--accent);
-        }
-
-        /* Empty state */
-        .empty-illustration {
-            opacity: 0.15;
-        }
-
-        /* Skeleton loading */
-        .skeleton {
-            background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: 6px;
-        }
-
-        /* Konfirmasi dialog */
-        .confirm-overlay {
-            backdrop-filter: blur(4px);
-            background: rgba(0,0,0,0.5);
-        }
-
-        @media print {
-            header, .no-print, .demo-banner { display: none !important; }
-            body { background: white; }
-            body::before { display: none; }
-        }
+        @media print { header, .no-print, .demo-banner { display: none !important; } body { background: white; } body::before { display: none; } }
     </style>
 </head>
 <body>
@@ -281,104 +140,71 @@
         </div>
     </header>
 
-    <!-- Banner mode demo -->
     <div id="demoBanner" class="demo-banner hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between flex-wrap gap-2">
             <div class="flex items-center gap-2 text-sm">
                 <i class="fas fa-info-circle" style="color: var(--accent);"></i>
                 <span>Data disimpan <strong>lokal di browser</strong>. Hubungkan dengan Google Spreadsheet untuk penyimpanan online.</span>
             </div>
-            <button onclick="switchView('pengaturan')" class="text-sm font-semibold px-3 py-1 rounded-full" style="background: var(--accent); color: white;">
-                Hubungkan Sekarang
-            </button>
+            <button onclick="switchView('pengaturan')" class="text-sm font-semibold px-3 py-1 rounded-full" style="background: var(--accent); color: white;">Hubungkan</button>
         </div>
     </div>
 
-    <!-- Konten Utama -->
     <main class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-6">
-
         <!-- ===== DASHBOARD ===== -->
         <div id="viewDashboard" class="view">
             <div class="mb-6 animate-fade-in-up">
                 <h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--primary-dark);">Dashboard</h2>
                 <p class="text-sm mt-1" style="color: var(--text-muted);">Ringkasan arsip surat Anda</p>
             </div>
-
-            <!-- Kartu Statistik -->
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 <div class="stat-card bg-white rounded-xl p-5 shadow-sm border animate-fade-in-up stagger-1" style="border-left: 4px solid var(--masuk);">
                     <div class="flex items-center justify-between mb-3">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(22,105,122,0.1);">
-                            <i class="fas fa-inbox" style="color: var(--masuk);"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(22,105,122,0.1);"><i class="fas fa-inbox" style="color: var(--masuk);"></i></div>
                         <span class="text-xs font-medium px-2 py-0.5 rounded-full badge-masuk">Masuk</span>
                     </div>
-                    <div id="statMasuk" class="text-3xl font-bold" style="color: var(--text);">0</div>
+                    <div id="statMasuk" class="text-3xl font-bold">0</div>
                     <div class="text-xs mt-1" style="color: var(--text-muted);">Total Surat Masuk</div>
                 </div>
-
                 <div class="stat-card bg-white rounded-xl p-5 shadow-sm border animate-fade-in-up stagger-2" style="border-left: 4px solid var(--keluar);">
                     <div class="flex items-center justify-between mb-3">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(184,114,45,0.1);">
-                            <i class="fas fa-paper-plane" style="color: var(--keluar);"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(184,114,45,0.1);"><i class="fas fa-paper-plane" style="color: var(--keluar);"></i></div>
                         <span class="text-xs font-medium px-2 py-0.5 rounded-full badge-keluar">Keluar</span>
                     </div>
-                    <div id="statKeluar" class="text-3xl font-bold" style="color: var(--text);">0</div>
+                    <div id="statKeluar" class="text-3xl font-bold">0</div>
                     <div class="text-xs mt-1" style="color: var(--text-muted);">Total Surat Keluar</div>
                 </div>
-
                 <div class="stat-card bg-white rounded-xl p-5 shadow-sm border animate-fade-in-up stagger-3" style="border-left: 4px solid var(--accent);">
                     <div class="flex items-center justify-between mb-3">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(212,152,61,0.1);">
-                            <i class="fas fa-calendar-check" style="color: var(--accent);"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(212,152,61,0.1);"><i class="fas fa-calendar-check" style="color: var(--accent);"></i></div>
                         <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background: rgba(212,152,61,0.1); color: var(--accent);">Bulan Ini</span>
                     </div>
-                    <div id="statBulanIni" class="text-3xl font-bold" style="color: var(--text);">0</div>
+                    <div id="statBulanIni" class="text-3xl font-bold">0</div>
                     <div class="text-xs mt-1" style="color: var(--text-muted);">Surat Bulan Ini</div>
                 </div>
-
                 <div class="stat-card bg-white rounded-xl p-5 shadow-sm border animate-fade-in-up stagger-4" style="border-left: 4px solid var(--success);">
                     <div class="flex items-center justify-between mb-3">
-                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(45,143,78,0.1);">
-                            <i class="fas fa-file-pdf" style="color: var(--success);"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: rgba(45,143,78,0.1);"><i class="fas fa-file-pdf" style="color: var(--success);"></i></div>
                         <span class="text-xs font-medium px-2 py-0.5 rounded-full" style="background: rgba(45,143,78,0.1); color: var(--success);">PDF</span>
                     </div>
-                    <div id="statPDF" class="text-3xl font-bold" style="color: var(--text);">0</div>
+                    <div id="statPDF" class="text-3xl font-bold">0</div>
                     <div class="text-xs mt-1" style="color: var(--text-muted);">Dokumen Terupload</div>
                 </div>
             </div>
-
-            <!-- Surat Terbaru -->
             <div class="grid lg:grid-cols-2 gap-6">
                 <div class="bg-white rounded-xl shadow-sm border p-5 animate-fade-in-up stagger-2">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-bold" style="color: var(--masuk);">
-                            <i class="fas fa-inbox mr-2"></i>Surat Masuk Terbaru
-                        </h3>
-                        <button onclick="switchView('masuk')" class="text-xs font-medium px-3 py-1 rounded-full hover:opacity-80" style="background: rgba(22,105,122,0.1); color: var(--masuk);">
-                            Lihat Semua
-                        </button>
+                        <h3 class="text-lg font-bold" style="color: var(--masuk);"><i class="fas fa-inbox mr-2"></i>Surat Masuk Terbaru</h3>
+                        <button onclick="switchView('masuk')" class="text-xs font-medium px-3 py-1 rounded-full hover:opacity-80" style="background: rgba(22,105,122,0.1); color: var(--masuk);">Lihat Semua</button>
                     </div>
-                    <div id="recentMasuk" class="space-y-3">
-                        <p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat masuk</p>
-                    </div>
+                    <div id="recentMasuk" class="space-y-3"><p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat masuk</p></div>
                 </div>
-
                 <div class="bg-white rounded-xl shadow-sm border p-5 animate-fade-in-up stagger-3">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-lg font-bold" style="color: var(--keluar);">
-                            <i class="fas fa-paper-plane mr-2"></i>Surat Keluar Terbaru
-                        </h3>
-                        <button onclick="switchView('keluar')" class="text-xs font-medium px-3 py-1 rounded-full hover:opacity-80" style="background: rgba(184,114,45,0.1); color: var(--keluar);">
-                            Lihat Semua
-                        </button>
+                        <h3 class="text-lg font-bold" style="color: var(--keluar);"><i class="fas fa-paper-plane mr-2"></i>Surat Keluar Terbaru</h3>
+                        <button onclick="switchView('keluar')" class="text-xs font-medium px-3 py-1 rounded-full hover:opacity-80" style="background: rgba(184,114,45,0.1); color: var(--keluar);">Lihat Semua</button>
                     </div>
-                    <div id="recentKeluar" class="space-y-3">
-                        <p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat keluar</p>
-                    </div>
+                    <div id="recentKeluar" class="space-y-3"><p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat keluar</p></div>
                 </div>
             </div>
         </div>
@@ -390,29 +216,18 @@
                     <h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--primary-dark);">Surat Masuk</h2>
                     <p class="text-sm mt-1" style="color: var(--text-muted);">Kelola arsip surat masuk Anda</p>
                 </div>
-                <button onclick="openModal('masuk')" class="btn-primary px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 no-print">
-                    <i class="fas fa-plus"></i> Tambah Surat Masuk
-                </button>
+                <button onclick="openModal('masuk')" class="btn-primary px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 no-print"><i class="fas fa-plus"></i> Tambah Surat Masuk</button>
             </div>
-
-            <!-- Pencarian -->
             <div class="bg-white rounded-xl shadow-sm border p-4 mb-4 no-print animate-fade-in-up stagger-1">
                 <div class="flex gap-3 flex-wrap">
                     <div class="flex-1 min-w-[200px]">
-                        <div class="relative">
-                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i>
-                            <input type="text" id="searchMasuk" placeholder="Cari surat masuk..." oninput="renderMasukTable()"
-                                class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                        </div>
+                        <div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i><input type="text" id="searchMasuk" placeholder="Cari surat masuk..." oninput="renderMasukTable()" class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);"></div>
                     </div>
-                    <input type="month" id="filterBulanMasuk" onchange="renderMasukTable()"
-                        class="form-input px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                    <input type="month" id="filterBulanMasuk" onchange="renderMasukTable()" class="form-input px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
                 </div>
             </div>
-
-            <!-- Tabel -->
             <div class="bg-white rounded-xl shadow-sm border animate-fade-in-up stagger-2">
-                <div class="table-wrapper">
+                <div class="overflow-x-auto">
                     <table class="data-table w-full text-sm">
                         <thead>
                             <tr style="background: linear-gradient(135deg, rgba(22,105,122,0.06), rgba(22,105,122,0.02));">
@@ -428,10 +243,7 @@
                         <tbody id="tbodyMasuk"></tbody>
                     </table>
                 </div>
-                <div id="emptyMasuk" class="text-center py-12 hidden">
-                    <i class="fas fa-inbox text-5xl mb-3 empty-illustration" style="color: var(--masuk);"></i>
-                    <p style="color: var(--text-muted);">Belum ada surat masuk</p>
-                </div>
+                <div id="emptyMasuk" class="text-center py-12 hidden"><i class="fas fa-inbox text-5xl mb-3" style="color: var(--border);"></i><p style="color: var(--text-muted);">Belum ada surat masuk</p></div>
             </div>
         </div>
 
@@ -442,29 +254,18 @@
                     <h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--primary-dark);">Surat Keluar</h2>
                     <p class="text-sm mt-1" style="color: var(--text-muted);">Kelola arsip surat keluar Anda</p>
                 </div>
-                <button onclick="openModal('keluar')" class="btn-accent px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 no-print">
-                    <i class="fas fa-plus"></i> Tambah Surat Keluar
-                </button>
+                <button onclick="openModal('keluar')" class="btn-accent px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 no-print"><i class="fas fa-plus"></i> Tambah Surat Keluar</button>
             </div>
-
-            <!-- Pencarian -->
             <div class="bg-white rounded-xl shadow-sm border p-4 mb-4 no-print animate-fade-in-up stagger-1">
                 <div class="flex gap-3 flex-wrap">
                     <div class="flex-1 min-w-[200px]">
-                        <div class="relative">
-                            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i>
-                            <input type="text" id="searchKeluar" placeholder="Cari surat keluar..." oninput="renderKeluarTable()"
-                                class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                        </div>
+                        <div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i><input type="text" id="searchKeluar" placeholder="Cari surat keluar..." oninput="renderKeluarTable()" class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);"></div>
                     </div>
-                    <input type="month" id="filterBulanKeluar" onchange="renderKeluarTable()"
-                        class="form-input px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                    <input type="month" id="filterBulanKeluar" onchange="renderKeluarTable()" class="form-input px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
                 </div>
             </div>
-
-            <!-- Tabel -->
             <div class="bg-white rounded-xl shadow-sm border animate-fade-in-up stagger-2">
-                <div class="table-wrapper">
+                <div class="overflow-x-auto">
                     <table class="data-table w-full text-sm">
                         <thead>
                             <tr style="background: linear-gradient(135deg, rgba(184,114,45,0.06), rgba(184,114,45,0.02));">
@@ -479,10 +280,7 @@
                         <tbody id="tbodyKeluar"></tbody>
                     </table>
                 </div>
-                <div id="emptyKeluar" class="text-center py-12 hidden">
-                    <i class="fas fa-paper-plane text-5xl mb-3 empty-illustration" style="color: var(--keluar);"></i>
-                    <p style="color: var(--text-muted);">Belum ada surat keluar</p>
-                </div>
+                <div id="emptyKeluar" class="text-center py-12 hidden"><i class="fas fa-paper-plane text-5xl mb-3" style="color: var(--border);"></i><p style="color: var(--text-muted);">Belum ada surat keluar</p></div>
             </div>
         </div>
 
@@ -490,125 +288,54 @@
         <div id="viewPengaturan" class="view hidden">
             <div class="mb-6 animate-fade-in-up">
                 <h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--primary-dark);">Pengaturan</h2>
-                <p class="text-sm mt-1" style="color: var(--text-muted);">Konfigurasi koneksi Google Spreadsheet</p>
+                <p class="text-sm mt-1" style="color: var(--text-muted);">Konfigurasi koneksi dan klasifikasi penomoran</p>
             </div>
 
-            <div class="grid lg:grid-cols-5 gap-6">
-                <!-- Form Konfigurasi -->
+            <div class="grid lg:grid-cols-5 gap-6 mb-6">
+                <!-- Koneksi Spreadsheet -->
                 <div class="lg:col-span-2 animate-fade-in-up stagger-1">
                     <div class="bg-white rounded-xl shadow-sm border p-6">
-                        <h3 class="text-lg font-bold mb-4" style="color: var(--primary);">
-                            <i class="fas fa-link mr-2"></i>Koneksi Spreadsheet
-                        </h3>
-
+                        <h3 class="text-lg font-bold mb-4" style="color: var(--primary);"><i class="fas fa-link mr-2"></i>Koneksi Spreadsheet</h3>
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-1.5" style="color: var(--text);">URL Google Apps Script</label>
-                            <input type="url" id="inputAppsScriptUrl" placeholder="https://script.google.com/macros/s/..."
-                                class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                            <p class="text-xs mt-1.5" style="color: var(--text-muted);">Tempel URL dari hasil deploy Apps Script</p>
+                            <label class="block text-sm font-medium mb-1.5">URL Google Apps Script</label>
+                            <input type="url" id="inputAppsScriptUrl" placeholder="https://script.google.com/macros/s/..." class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
                         </div>
-
                         <div class="flex gap-2">
-                            <button onclick="saveConfig()" class="btn-primary px-5 py-2.5 rounded-lg font-semibold text-sm flex-1">
-                                <i class="fas fa-save mr-1"></i> Simpan
-                            </button>
-                            <button onclick="testConnection()" class="px-5 py-2.5 rounded-lg font-semibold text-sm border flex-1 hover:bg-gray-50" style="border-color: var(--border);">
-                                <i class="fas fa-plug mr-1"></i> Tes Koneksi
-                            </button>
+                            <button onclick="saveConfig()" class="btn-primary px-5 py-2.5 rounded-lg font-semibold text-sm flex-1"><i class="fas fa-save mr-1"></i> Simpan</button>
+                            <button onclick="testConnection()" class="px-5 py-2.5 rounded-lg font-semibold text-sm border flex-1 hover:bg-gray-50" style="border-color: var(--border);"><i class="fas fa-plug mr-1"></i> Tes</button>
                         </div>
-
-                        <div id="connectionStatus" class="mt-4 hidden">
-                            <div class="flex items-center gap-2 p-3 rounded-lg text-sm">
-                                <i id="connIcon" class="fas"></i>
-                                <span id="connText"></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Format Penomoran -->
-                    <div class="bg-white rounded-xl shadow-sm border p-6 mt-4">
-                        <h3 class="text-lg font-bold mb-4" style="color: var(--primary);">
-                            <i class="fas fa-hashtag mr-2"></i>Format Penomoran
-                        </h3>
-                        <div class="space-y-3">
-                            <div class="p-3 rounded-lg" style="background: rgba(22,105,122,0.05);">
-                                <div class="text-xs font-medium mb-1" style="color: var(--masuk);">Surat Masuk</div>
-                                <code class="text-sm font-bold" style="color: var(--text);">001/SM/2025</code>
-                                <p class="text-xs mt-1" style="color: var(--text-muted);">Nomor urut / SM / Tahun</p>
-                            </div>
-                            <div class="p-3 rounded-lg" style="background: rgba(184,114,45,0.05);">
-                                <div class="text-xs font-medium mb-1" style="color: var(--keluar);">Surat Keluar</div>
-                                <code class="text-sm font-bold" style="color: var(--text);">001/SK/2025</code>
-                                <p class="text-xs mt-1" style="color: var(--text-muted);">Nomor urut / SK / Tahun</p>
-                            </div>
-                        </div>
+                        <div id="connectionStatus" class="mt-4 hidden"><div class="flex items-center gap-2 p-3 rounded-lg text-sm"><i id="connIcon" class="fas"></i><span id="connText"></span></div></div>
                     </div>
                 </div>
 
-                <!-- Panduan Setup -->
+                <!-- Klasifikasi Penomoran -->
                 <div class="lg:col-span-3 animate-fade-in-up stagger-2">
                     <div class="bg-white rounded-xl shadow-sm border p-6">
-                        <h3 class="text-lg font-bold mb-4" style="color: var(--primary);">
-                            <i class="fas fa-book mr-2"></i>Panduan Setup Google Spreadsheet
-                        </h3>
+                        <h3 class="text-lg font-bold mb-2" style="color: var(--primary);"><i class="fas fa-tags mr-2"></i>Klasifikasi Penomoran</h3>
+                        <p class="text-sm mb-4" style="color: var(--text-muted);">Atur kode klasifikasi berdasarkan kata kunci pada perihal surat. Nomor urut akan dipisah per klasifikasi.</p>
+                        
+                        <div class="flex gap-2 mb-4">
+                            <input type="text" id="inputKeyword" placeholder="Kata kunci (misal: Undangan)" class="form-input flex-1 px-3 py-2 rounded-lg border text-sm" style="border-color: var(--border);">
+                            <input type="text" id="inputCode" placeholder="Kode (misal: UND)" maxlength="5" class="form-input w-24 px-3 py-2 rounded-lg border text-sm uppercase text-center font-semibold" style="border-color: var(--border);">
+                            <button onclick="addClassification()" class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold"><i class="fas fa-plus"></i></button>
+                        </div>
 
-                        <div class="space-y-5">
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--primary);">1</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Buat Google Spreadsheet Baru</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Buka <a href="https://sheets.google.com" target="_blank" class="underline" style="color: var(--primary);">Google Sheets</a> dan buat spreadsheet baru. Beri nama misalnya "Arsip Surat".</p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--primary);">2</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Buat Dua Sheet</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Buat sheet <strong>"Surat Masuk"</strong> dengan header: Timestamp, Nomor Surat, Tanggal Surat, Tanggal Diterima, Pengirim, Perihal, Keterangan, Link PDF</p>
-                                    <p class="text-sm mt-1" style="color: var(--text-muted);">Buat sheet <strong>"Surat Keluar"</strong> dengan header: Timestamp, Nomor Surat, Tanggal Surat, Tujuan, Perihal, Keterangan, Link PDF</p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--primary);">3</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Buka Apps Script</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Klik menu <strong>Ekstensi &gt; Apps Script</strong>. Hapus semua kode default, lalu tempel kode di bawah ini:</p>
-                                    <div class="mt-3 relative">
-                                        <button onclick="copyScript()" class="absolute top-2 right-2 text-xs px-3 py-1 rounded-md font-medium hover:opacity-80" style="background: var(--primary); color: white;">
-                                            <i class="fas fa-copy mr-1"></i>Salin
-                                        </button>
-                                        <pre id="scriptCode" class="text-xs p-4 rounded-lg overflow-x-auto max-h-80" style="background: #1C1C28; color: #E0D8CE; line-height: 1.6;"></pre>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--accent);">4</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Ganti Folder ID</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Di baris atas kode, ganti <code class="px-1.5 py-0.5 rounded text-xs" style="background: rgba(212,152,61,0.1);">GANTI_DENGAN_FOLDER_ID</code> dengan ID folder Google Drive untuk menyimpan PDF. Cara mendapatkannya: buka folder di Drive, salin ID dari URL.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--accent);">5</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Deploy sebagai Web App</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Klik <strong>Deploy &gt; New deployment</strong>. Pilih type <strong>Web app</strong>. Set "Execute as" ke <strong>Me</strong> dan "Who has access" ke <strong>Anyone</strong>. Klik Deploy, lalu salin URL-nya.</p>
-                                </div>
-                            </div>
-
-                            <div class="flex gap-4">
-                                <div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--success);">6</div>
-                                <div>
-                                    <h4 class="font-semibold text-sm mb-1">Tempel URL di Atas</h4>
-                                    <p class="text-sm" style="color: var(--text-muted);">Tempel URL deployment ke kolom "URL Google Apps Script" di form kiri, lalu klik Simpan. Selesai!</p>
-                                </div>
-                            </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead><tr style="background: rgba(22,105,122,0.04);"><th class="text-left px-4 py-2 font-medium" style="color: var(--primary-dark);">Kata Kunci</th><th class="text-left px-4 py-2 font-medium" style="color: var(--primary-dark);">Kode</th><th class="text-left px-4 py-2 font-medium" style="color: var(--primary-dark);">Contoh Format</th><th class="px-4 py-2"></th></tr></thead>
+                                <tbody id="tbodyKlasifikasi"></tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- Panduan Script -->
+            <div class="bg-white rounded-xl shadow-sm border p-6 animate-fade-in-up stagger-3">
+                <h3 class="text-lg font-bold mb-4" style="color: var(--primary);"><i class="fas fa-book mr-2"></i>Panduan Setup Google Spreadsheet</h3>
+                <div class="space-y-5">
+                    <div class="flex gap-4"><div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--primary);">1</div><div><h4 class="font-semibold text-sm mb-1">Buat Google Spreadsheet Baru</h4><p class="text-sm" style="color: var(--text-muted);">Buat sheet <strong>"Surat Masuk"</strong> dan <strong>"Surat Keluar"</strong> dengan header kolom yang sesuai.</p></div></div>
+                    <div class="flex gap-4"><div class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm text-white" style="background: var(--primary);">2</div><div><h4 class="font-semibold text-sm mb-1">Buka Apps Script & Tempel Kode</h4><p class="text-sm mb-3" style="color: var(--text-muted);">Klik <strong>Ekstensi > Apps Script</strong>. Hapus kode default, lalu tempel kode di bawah:</p><div class="relative"><button onclick="copyScript()" class="absolute top-2 right-2 text-xs px-3 py-1 rounded-md font-medium hover:opacity-80 z-10" style="background: var(--primary); color: white;"><i class="fas fa-copy mr-1"></i>Salin</button><pre id="scriptCode" class="text-xs p-4 rounded-lg overflow-x-auto max-h-72" style="background: #1C1C28; color: #E0D8CE; line-height: 1.6;"></pre></div></div></div>
                 </div>
             </div>
         </div>
@@ -620,91 +347,66 @@
         <div class="modal-box relative z-10 w-full max-w-lg mx-auto mt-[5vh] max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl">
             <div class="sticky top-0 bg-white rounded-t-2xl border-b px-6 py-4 flex items-center justify-between z-10">
                 <h3 id="modalTitle" class="text-lg font-bold" style="color: var(--primary-dark);">Tambah Surat</h3>
-                <button onclick="closeModal()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <i class="fas fa-times" style="color: var(--text-muted);"></i>
-                </button>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100"><i class="fas fa-times" style="color: var(--text-muted);"></i></button>
             </div>
-
             <form id="suratForm" onsubmit="handleSubmit(event)" class="px-6 py-5 space-y-4">
-                <!-- Nomor Surat (auto) -->
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color: var(--text-muted);">(otomatis)</span></label>
-                    <div class="relative">
-                        <i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i>
-                        <input type="text" id="fNomorSurat" readonly
-                            class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color: var(--border);">
-                    </div>
-                </div>
-
-                <!-- Tanggal Surat -->
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label>
-                    <input type="date" id="fTanggalSurat" required
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                </div>
-
-                <!-- Tanggal Diterima (khusus masuk) -->
-                <div id="fieldTanggalDiterima">
-                    <label class="block text-sm font-medium mb-1.5">Tanggal Diterima <span class="text-red-500">*</span></label>
-                    <input type="date" id="fTanggalDiterima" required
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                </div>
-
-                <!-- Pengirim (khusus masuk) -->
-                <div id="fieldPengirim">
-                    <label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label>
-                    <input type="text" id="fPengirim" placeholder="Instansi/pengirim surat"
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                </div>
-
-                <!-- Tujuan (khusus keluar) -->
-                <div id="fieldTujuan" class="hidden">
-                    <label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label>
-                    <input type="text" id="fTujuan" placeholder="Instansi/tujuan surat"
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
-                </div>
-
-                <!-- Perihal -->
                 <div>
                     <label class="block text-sm font-medium mb-1.5">Perihal <span class="text-red-500">*</span></label>
-                    <input type="text" id="fPerihal" placeholder="Perihal surat" required
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                    <input type="text" id="fPerihal" placeholder="Ketik perihal surat..." oninput="handlePerihalChange()" required class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                    <p class="text-xs mt-1" style="color: var(--text-muted);">Klasifikasi akan terdeteksi otomatis dari perihal</p>
                 </div>
 
-                <!-- Keterangan -->
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Klasifikasi Surat</label>
+                    <select id="fKlasifikasi" onchange="updateNomorSurat()" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm font-semibold" style="border-color: var(--border);">
+                        <!-- Opsi diisi dinamis -->
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color: var(--text-muted);">(otomatis)</span></label>
+                    <div class="relative"><i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--text-muted);"></i><input type="text" id="fNomorSurat" readonly class="form-input w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color: var(--border);"></div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label>
+                    <input type="date" id="fTanggalSurat" required class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                </div>
+
+                <div id="fieldTanggalDiterima">
+                    <label class="block text-sm font-medium mb-1.5">Tanggal Diterima <span class="text-red-500">*</span></label>
+                    <input type="date" id="fTanggalDiterima" required class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                </div>
+
+                <div id="fieldPengirim">
+                    <label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label>
+                    <input type="text" id="fPengirim" placeholder="Instansi/pengirim surat" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                </div>
+
+                <div id="fieldTujuan" class="hidden">
+                    <label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label>
+                    <input type="text" id="fTujuan" placeholder="Instansi/tujuan surat" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color: var(--border);">
+                </div>
+
                 <div>
                     <label class="block text-sm font-medium mb-1.5">Keterangan</label>
-                    <textarea id="fKeterangan" rows="2" placeholder="Catatan tambahan (opsional)"
-                        class="form-input w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color: var(--border);"></textarea>
+                    <textarea id="fKeterangan" rows="2" placeholder="Catatan tambahan (opsional)" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color: var(--border);"></textarea>
                 </div>
 
-                <!-- Upload PDF -->
                 <div>
                     <label class="block text-sm font-medium mb-1.5">Upload Dokumen PDF</label>
-                    <div id="uploadArea" class="upload-area rounded-lg p-5 text-center cursor-pointer" onclick="document.getElementById('fPDF').click()"
-                         ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                    <div id="uploadArea" class="upload-area rounded-lg p-5 text-center cursor-pointer" onclick="document.getElementById('fPDF').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
                         <i class="fas fa-cloud-upload-alt text-2xl mb-2" style="color: var(--text-muted);"></i>
                         <p class="text-sm" style="color: var(--text-muted);">Klik atau seret file PDF ke sini</p>
                         <p class="text-xs mt-1" style="color: var(--border);">Maks. 5 MB</p>
                         <input type="file" id="fPDF" accept="application/pdf" class="hidden" onchange="handleFileSelect(event)">
                     </div>
-                    <div id="fileInfo" class="hidden mt-2 flex items-center gap-2 p-2.5 rounded-lg" style="background: rgba(45,143,78,0.06);">
-                        <i class="fas fa-file-pdf" style="color: var(--danger);"></i>
-                        <span id="fileName" class="text-sm flex-1 truncate"></span>
-                        <button type="button" onclick="removeFile()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color: var(--danger);">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+                    <div id="fileInfo" class="hidden mt-2 flex items-center gap-2 p-2.5 rounded-lg" style="background: rgba(45,143,78,0.06);"><i class="fas fa-file-pdf" style="color: var(--danger);"></i><span id="fileName" class="text-sm flex-1 truncate"></span><button type="button" onclick="removeFile()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color: var(--danger);"><i class="fas fa-times"></i></button></div>
                 </div>
 
-                <!-- Tombol Submit -->
                 <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="closeModal()" class="flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color: var(--border);">
-                        Batal
-                    </button>
-                    <button type="submit" id="btnSubmit" class="btn-primary flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2">
-                        <i class="fas fa-save"></i> Simpan
-                    </button>
+                    <button type="button" onclick="closeModal()" class="flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color: var(--border);">Batal</button>
+                    <button type="submit" id="btnSubmit" class="btn-primary flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"><i class="fas fa-save"></i> Simpan</button>
                 </div>
             </form>
         </div>
@@ -715,24 +417,17 @@
         <div class="confirm-overlay absolute inset-0"></div>
         <div class="relative z-10 w-full max-w-sm mx-auto mt-[30vh] bg-white rounded-2xl shadow-2xl p-6 animate-scale-in">
             <div class="text-center mb-5">
-                <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background: rgba(196,69,54,0.1);">
-                    <i class="fas fa-trash-alt text-xl" style="color: var(--danger);"></i>
-                </div>
-                <h3 class="text-lg font-bold" style="color: var(--text);">Hapus Surat?</h3>
+                <div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background: rgba(196,69,54,0.1);"><i class="fas fa-trash-alt text-xl" style="color: var(--danger);"></i></div>
+                <h3 class="text-lg font-bold">Hapus Surat?</h3>
                 <p class="text-sm mt-1" style="color: var(--text-muted);">Data yang dihapus tidak dapat dikembalikan.</p>
             </div>
             <div class="flex gap-3">
-                <button onclick="closeConfirm()" class="flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color: var(--border);">
-                    Batal
-                </button>
-                <button id="btnConfirmDelete" class="btn-danger flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm">
-                    Hapus
-                </button>
+                <button onclick="closeConfirm()" class="flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color: var(--border);">Batal</button>
+                <button id="btnConfirmDelete" class="btn-danger flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm">Hapus</button>
             </div>
         </div>
     </div>
 
-    <!-- Toast Container -->
     <div id="toastContainer" class="fixed bottom-6 right-6 z-[70] space-y-2 max-w-sm"></div>
 
     <script>
@@ -742,102 +437,71 @@
             suratMasuk: JSON.parse(localStorage.getItem(`${APP_KEY}-masuk`) || '[]'),
             suratKeluar: JSON.parse(localStorage.getItem(`${APP_KEY}-keluar`) || '[]'),
             appsScriptUrl: localStorage.getItem(`${APP_KEY}-url`) || '',
+            // Klasifikasi default (bisa ditambah/dihapus user)
+            klasifikasi: JSON.parse(localStorage.getItem(`${APP_KEY}-klasifikasi`) || JSON.stringify([
+                { keyword: 'undangan', code: 'UND' },
+                { keyword: 'penugasan', code: 'TGS' },
+                { keyword: 'sppd', code: 'SPPD' },
+                { keyword: 'izin', code: 'IZN' },
+                { keyword: 'pemberitahuan', code: 'PBR' },
+                { keyword: 'permohonan', code: 'PMH' }
+            ])),
             currentView: 'dashboard',
-            modalType: null, // 'masuk' atau 'keluar'
+            modalType: null,
             selectedFile: null,
             selectedFileBase64: null,
-            deleteTarget: null // { type, index }
+            deleteTarget: null
         };
 
-        // Kode Apps Script yang akan ditampilkan di panduan
         const APPS_SCRIPT_CODE = `// === KONFIGURASI ===
-// Ganti dengan ID folder Google Drive untuk menyimpan PDF
 var DRIVE_FOLDER_ID = 'GANTI_DENGAN_FOLDER_ID';
 
 function doGet(e) {
   var action = e.parameter.action;
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   try {
-    if (action === 'getMasuk') {
-      return sendResponse(getSheetData(ss, 'Surat Masuk'));
-    } else if (action === 'getKeluar') {
-      return sendResponse(getSheetData(ss, 'Surat Keluar'));
-    } else if (action === 'getLastNumber') {
+    if (action === 'getMasuk') return sendResponse(getSheetData(ss, 'Surat Masuk'));
+    else if (action === 'getKeluar') return sendResponse(getSheetData(ss, 'Surat Keluar'));
+    else if (action === 'getLastNumber') {
       var type = e.parameter.type;
       var year = e.parameter.year;
-      return sendResponse(getLastNumber(ss, type, year));
-    } else if (action === 'ping') {
-      return sendResponse({ success: true, message: 'Koneksi berhasil' });
-    }
+      var code = e.parameter.code || (type === 'masuk' ? 'SM' : 'SK');
+      return sendResponse(getLastNumber(ss, type, year, code));
+    } else if (action === 'ping') return sendResponse({ success: true, message: 'Koneksi berhasil' });
     return sendResponse({ success: false, error: 'Action tidak ditemukan' });
-  } catch(err) {
-    return sendResponse({ success: false, error: err.message });
-  }
+  } catch(err) { return sendResponse({ success: false, error: err.message }); }
 }
 
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-
-    // Upload PDF ke Drive jika ada
     var pdfLink = '';
     if (data.pdfBase64 && data.pdfBase64.length > 0) {
       pdfLink = uploadPDFToDrive(data.pdfBase64, data.nomorSurat);
     }
-
     if (data.type === 'masuk') {
-      var sheet = ss.getSheetByName('Surat Masuk');
-      sheet.appendRow([
-        new Date(),
-        data.nomorSurat,
-        data.tanggalSurat,
-        data.tanggalDiterima,
-        data.pengirim,
-        data.perihal,
-        data.keterangan,
-        pdfLink
-      ]);
+      ss.getSheetByName('Surat Masuk').appendRow([new Date(), data.nomorSurat, data.tanggalSurat, data.tanggalDiterima, data.pengirim, data.perihal, data.klasifikasi, data.keterangan, pdfLink]);
     } else if (data.type === 'keluar') {
-      var sheet = ss.getSheetByName('Surat Keluar');
-      sheet.appendRow([
-        new Date(),
-        data.nomorSurat,
-        data.tanggalSurat,
-        data.tujuan,
-        data.perihal,
-        data.keterangan,
-        pdfLink
-      ]);
+      ss.getSheetByName('Surat Keluar').appendRow([new Date(), data.nomorSurat, data.tanggalSurat, data.tujuan, data.perihal, data.klasifikasi, data.keterangan, pdfLink]);
     }
-
     return sendResponse({ success: true, message: 'Data berhasil disimpan' });
-  } catch(err) {
-    return sendResponse({ success: false, error: err.message });
-  }
+  } catch(err) { return sendResponse({ success: false, error: err.message }); }
 }
 
-function sendResponse(data) {
-  return ContentService
-    .createTextOutput(JSON.stringify(data))
-    .setMimeType(ContentService.MimeType.JSON);
-}
+function sendResponse(data) { return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON); }
 
 function getSheetData(ss, sheetName) {
   var sheet = ss.getSheetByName(sheetName);
   if (!sheet) return { success: true, data: [] };
   var data = sheet.getDataRange().getValues();
   if (data.length <= 1) return { success: true, data: [] };
-  var headers = data[0];
-  var result = [];
+  var headers = data[0]; var result = [];
   for (var i = 1; i < data.length; i++) {
     var row = {};
     for (var j = 0; j < headers.length; j++) {
       var val = data[i][j];
-      // Konversi Date ke string
-      if (val instanceof Date) {
-        val = Utilities.formatDate(val, 'Asia/Jakarta', 'yyyy-MM-dd');
-      }
+      if (val instanceof Date) val = Utilities.formatDate(val, 'Asia/Jakarta', 'yyyy-MM-dd');
       row[headers[j]] = val;
     }
     result.push(row);
@@ -845,21 +509,18 @@ function getSheetData(ss, sheetName) {
   return { success: true, data: result };
 }
 
-function getLastNumber(ss, type, year) {
+function getLastNumber(ss, type, year, code) {
   var sheetName = type === 'masuk' ? 'Surat Masuk' : 'Surat Keluar';
   var sheet = ss.getSheetByName(sheetName);
   if (!sheet) return { success: true, lastNumber: 0 };
   var data = sheet.getDataRange().getValues();
   var lastNum = 0;
-  var prefix = type === 'masuk' ? '/SM/' : '/SK/';
+  var prefix = '/' + code + '/';
   for (var i = 1; i < data.length; i++) {
     var nomor = data[i][1];
     if (nomor && nomor.toString().indexOf(prefix) > -1 && nomor.toString().indexOf(year) > -1) {
       var match = nomor.toString().match(/^(\\d+)/);
-      if (match) {
-        var num = parseInt(match[1]);
-        if (num > lastNum) lastNum = num;
-      }
+      if (match) { var num = parseInt(match[1]); if (num > lastNum) lastNum = num; }
     }
   }
   return { success: true, lastNumber: lastNum, year: parseInt(year) };
@@ -874,61 +535,36 @@ function uploadPDFToDrive(base64Data, nomorSurat) {
     var file = folder.createFile(blob);
     file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
     return file.getUrl();
-  } catch(err) {
-    return 'Error upload: ' + err.message;
-  }
+  } catch(err) { return 'Error upload: ' + err.message; }
 }
 
-// Jalankan sekali untuk membuat sheet jika belum ada
 function setupSheets() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var masuk = ss.getSheetByName('Surat Masuk');
-  if (!masuk) {
-    masuk = ss.insertSheet('Surat Masuk');
-    masuk.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tanggal Diterima','Pengirim','Perihal','Keterangan','Link PDF']);
-    masuk.getRange(1,1,1,8).setFontWeight('bold').setBackground('#16697A').setFontColor('#ffffff');
-  }
+  if (!masuk) { masuk = ss.insertSheet('Surat Masuk'); masuk.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tanggal Diterima','Pengirim','Perihal','Klasifikasi','Keterangan','Link PDF']); masuk.getRange(1,1,1,9).setFontWeight('bold').setBackground('#16697A').setFontColor('#ffffff'); }
   var keluar = ss.getSheetByName('Surat Keluar');
-  if (!keluar) {
-    keluar = ss.insertSheet('Surat Keluar');
-    keluar.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tujuan','Perihal','Keterangan','Link PDF']);
-    keluar.getRange(1,1,1,7).setFontWeight('bold').setBackground('#B8722D').setFontColor('#ffffff');
-  }
+  if (!keluar) { keluar = ss.insertSheet('Surat Keluar'); keluar.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tujuan','Perihal','Klasifikasi','Keterangan','Link PDF']); keluar.getRange(1,1,1,8).setFontWeight('bold').setBackground('#B8722D').setFontColor('#ffffff'); }
 }`;
 
-        // ===== NAVIGASI =====
+        // ===== NAVIGASI & RENDERING =====
         function switchView(view) {
             state.currentView = view;
-            // Sembunyikan semua view
             document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
-            // Tampilkan view yang dipilih
-            const target = document.getElementById('view' + view.charAt(0).toUpperCase() + view.slice(1));
-            if (target) {
-                target.classList.remove('hidden');
-                // Re-trigger animasi
-                target.querySelectorAll('.animate-fade-in-up, .animate-slide-in').forEach(el => {
-                    el.style.animation = 'none';
-                    el.offsetHeight; // reflow
-                    el.style.animation = '';
-                });
-            }
-            // Update tab aktif
+            document.getElementById('view' + view.charAt(0).toUpperCase() + view.slice(1)).classList.remove('hidden');
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.tab-btn[data-tab="${view}"]`).classList.add('active');
-
-            // Render konten sesuai view
             if (view === 'dashboard') renderDashboard();
             else if (view === 'masuk') renderMasukTable();
             else if (view === 'keluar') renderKeluarTable();
             else if (view === 'pengaturan') initPengaturan();
         }
 
-        // ===== PENOMORAN OTOMATIS =====
-        function generateNomorSurat(type) {
+        // ===== PENOMORAN OTOMATIS (DENGAN KLASIFIKASI) =====
+        function generateNomorSurat(type, klasifikasiCode) {
             const year = new Date().getFullYear();
             const data = type === 'masuk' ? state.suratMasuk : state.suratKeluar;
-            const prefix = type === 'masuk' ? 'SM' : 'SK';
-            const searchStr = `/${prefix}/${year}`;
+            const code = klasifikasiCode || (type === 'masuk' ? 'SM' : 'SK');
+            const searchStr = `/${code}/${year}`;
 
             let maxNum = 0;
             data.forEach(item => {
@@ -942,8 +578,49 @@ function setupSheets() {
             });
 
             const nextNum = maxNum + 1;
-            return String(nextNum).padStart(3, '0') + `/${prefix}/${year}`;
+            return String(nextNum).padStart(3, '0') + `/${code}/${year}`;
         }
+
+        function handlePerihalChange() {
+            const perihal = document.getElementById('fPerihal').value.toLowerCase();
+            const select = document.getElementById('fKlasifikasi');
+            
+            // Cek apakah ada keyword yang cocok
+            let matchedCode = '';
+            for (const klasifikasi of state.klasifikasi) {
+                if (perihal.includes(klasifikasi.keyword.toLowerCase())) {
+                    matchedCode = klasifikasi.code;
+                    break; // Ambil yang pertama cocok
+                }
+            }
+
+            if (matchedCode) {
+                select.value = matchedCode;
+            } else {
+                select.value = ''; // Kembali ke default
+            }
+            updateNomorSurat();
+        }
+
+        function updateNomorSurat() {
+            if (!state.modalType) return;
+            const klasifikasiCode = document.getElementById('fKlasifikasi').value;
+            const nomor = generateNomorSurat(state.modalType, klasifikasiCode);
+            document.getElementById('fNomorSurat').value = nomor;
+        }
+
+        function populateKlasifikasiDropdown() {
+            const select = document.getElementById('fKlasifikasi');
+            const type = state.modalType;
+            const defaultCode = type === 'masuk' ? 'SM' : 'SK';
+            
+            select.innerHTML = `<option value="">Default (${defaultCode})</option>`;
+            state.klasifikasi.forEach(k => {
+                select.innerHTML += `<option value="${k.code}">${k.code} - ${capitalizeFirst(k.keyword)}</option>`;
+            });
+        }
+
+        function capitalizeFirst(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
 
         // ===== LOCAL STORAGE =====
         function saveLocalData(type) {
@@ -952,64 +629,38 @@ function setupSheets() {
             localStorage.setItem(key, JSON.stringify(data));
         }
 
+        function saveKlasifikasi() {
+            localStorage.setItem(`${APP_KEY}-klasifikasi`, JSON.stringify(state.klasifikasi));
+        }
+
         // ===== API GOOGLE SPREADSHEET =====
         async function apiGet(action) {
             if (!state.appsScriptUrl) return null;
-            try {
-                const url = `${state.appsScriptUrl}?action=${action}`;
-                const response = await fetch(url);
-                return await response.json();
-            } catch (err) {
-                console.error('API GET Error:', err);
-                return null;
-            }
+            try { const res = await fetch(`${state.appsScriptUrl}?action=${action}`); return await res.json(); } 
+            catch (err) { console.error('API Error:', err); return null; }
         }
 
         async function apiPost(data) {
             if (!state.appsScriptUrl) return null;
             try {
-                const response = await fetch(state.appsScriptUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(data)
-                });
-                return await response.json();
-            } catch (err) {
-                console.error('API POST Error:', err);
-                return null;
-            }
+                const res = await fetch(state.appsScriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+                return await res.json();
+            } catch (err) { console.error('API Error:', err); return null; }
         }
 
         async function fetchSpreadsheetData() {
             if (!state.appsScriptUrl) return;
-
-            // Fetch data surat masuk
             const resMasuk = await apiGet('getMasuk');
             if (resMasuk && resMasuk.success) {
                 state.suratMasuk = resMasuk.data.map(row => ({
-                    id: row.Timestamp || Date.now(),
-                    nomorSurat: row['Nomor Surat'] || '',
-                    tanggalSurat: row['Tanggal Surat'] || '',
-                    tanggalDiterima: row['Tanggal Diterima'] || '',
-                    pengirim: row['Pengirim'] || '',
-                    perihal: row['Perihal'] || '',
-                    keterangan: row['Keterangan'] || '',
-                    pdfLink: row['Link PDF'] || ''
+                    id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', tanggalDiterima: row['Tanggal Diterima'] || '', pengirim: row['Pengirim'] || '', perihal: row['Perihal'] || '', klasifikasi: row['Klasifikasi'] || '', keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || ''
                 }));
                 saveLocalData('masuk');
             }
-
-            // Fetch data surat keluar
             const resKeluar = await apiGet('getKeluar');
             if (resKeluar && resKeluar.success) {
                 state.suratKeluar = resKeluar.data.map(row => ({
-                    id: row.Timestamp || Date.now(),
-                    nomorSurat: row['Nomor Surat'] || '',
-                    tanggalSurat: row['Tanggal Surat'] || '',
-                    tujuan: row['Tujuan'] || '',
-                    perihal: row['Perihal'] || '',
-                    keterangan: row['Keterangan'] || '',
-                    pdfLink: row['Link PDF'] || ''
+                    id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', tujuan: row['Tujuan'] || '', perihal: row['Perihal'] || '', klasifikasi: row['Klasifikasi'] || '', keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || ''
                 }));
                 saveLocalData('keluar');
             }
@@ -1017,441 +668,185 @@ function setupSheets() {
 
         // ===== RENDER DASHBOARD =====
         function renderDashboard() {
-            // Statistik
             const totalMasuk = state.suratMasuk.length;
             const totalKeluar = state.suratKeluar.length;
             const now = new Date();
-            const currentMonth = now.getMonth();
-            const currentYear = now.getFullYear();
-
             let bulanIni = 0;
-            [...state.suratMasuk, ...state.suratKeluar].forEach(s => {
-                const d = new Date(s.tanggalSurat);
-                if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) bulanIni++;
-            });
-
+            [...state.suratMasuk, ...state.suratKeluar].forEach(s => { const d = new Date(s.tanggalSurat); if (d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear()) bulanIni++; });
             let totalPDF = 0;
             state.suratMasuk.forEach(s => { if (s.pdfLink || s.fileName) totalPDF++; });
             state.suratKeluar.forEach(s => { if (s.pdfLink || s.fileName) totalPDF++; });
 
-            // Animasi counter
-            animateCounter('statMasuk', totalMasuk);
-            animateCounter('statKeluar', totalKeluar);
-            animateCounter('statBulanIni', bulanIni);
-            animateCounter('statPDF', totalPDF);
+            animateCounter('statMasuk', totalMasuk); animateCounter('statKeluar', totalKeluar); animateCounter('statBulanIni', bulanIni); animateCounter('statPDF', totalPDF);
 
-            // Surat masuk terbaru
             const recentMasuk = [...state.suratMasuk].reverse().slice(0, 5);
-            const recentMasukEl = document.getElementById('recentMasuk');
-            if (recentMasuk.length === 0) {
-                recentMasukEl.innerHTML = '<p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat masuk</p>';
-            } else {
-                recentMasukEl.innerHTML = recentMasuk.map(s => `
-                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(22,105,122,0.1);">
-                            <i class="fas fa-envelope-open-text text-xs" style="color: var(--masuk);"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-sm font-semibold truncate">${escHtml(s.perihal)}</div>
-                            <div class="text-xs" style="color: var(--text-muted);">${escHtml(s.pengirim)} &middot; ${formatDate(s.tanggalSurat)}</div>
-                        </div>
-                        <span class="text-xs font-mono px-2 py-0.5 rounded badge-masuk flex-shrink-0">${escHtml(s.nomorSurat)}</span>
-                    </div>
-                `).join('');
-            }
+            document.getElementById('recentMasuk').innerHTML = recentMasuk.length === 0 ? '<p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat masuk</p>' : recentMasuk.map(s => `
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(22,105,122,0.1);"><i class="fas fa-envelope-open-text text-xs" style="color: var(--masuk);"></i></div>
+                    <div class="flex-1 min-w-0"><div class="text-sm font-semibold truncate">${escHtml(s.perihal)}</div><div class="text-xs" style="color: var(--text-muted);">${escHtml(s.pengirim)} &middot; ${formatDate(s.tanggalSurat)}</div></div>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded badge-masuk flex-shrink-0">${escHtml(s.nomorSurat)}</span>
+                </div>`).join('');
 
-            // Surat keluar terbaru
             const recentKeluar = [...state.suratKeluar].reverse().slice(0, 5);
-            const recentKeluarEl = document.getElementById('recentKeluar');
-            if (recentKeluar.length === 0) {
-                recentKeluarEl.innerHTML = '<p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat keluar</p>';
-            } else {
-                recentKeluarEl.innerHTML = recentKeluar.map(s => `
-                    <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
-                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(184,114,45,0.1);">
-                            <i class="fas fa-paper-plane text-xs" style="color: var(--keluar);"></i>
-                        </div>
-                        <div class="flex-1 min-w-0">
-                            <div class="text-sm font-semibold truncate">${escHtml(s.perihal)}</div>
-                            <div class="text-xs" style="color: var(--text-muted);">${escHtml(s.tujuan)} &middot; ${formatDate(s.tanggalSurat)}</div>
-                        </div>
-                        <span class="text-xs font-mono px-2 py-0.5 rounded badge-keluar flex-shrink-0">${escHtml(s.nomorSurat)}</span>
-                    </div>
-                `).join('');
-            }
+            document.getElementById('recentKeluar').innerHTML = recentKeluar.length === 0 ? '<p class="text-sm text-center py-6" style="color: var(--text-muted);">Belum ada surat keluar</p>' : recentKeluar.map(s => `
+                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background: rgba(184,114,45,0.1);"><i class="fas fa-paper-plane text-xs" style="color: var(--keluar);"></i></div>
+                    <div class="flex-1 min-w-0"><div class="text-sm font-semibold truncate">${escHtml(s.perihal)}</div><div class="text-xs" style="color: var(--text-muted);">${escHtml(s.tujuan)} &middot; ${formatDate(s.tanggalSurat)}</div></div>
+                    <span class="text-xs font-mono px-2 py-0.5 rounded badge-keluar flex-shrink-0">${escHtml(s.nomorSurat)}</span>
+                </div>`).join('');
         }
 
-        // ===== RENDER TABEL MASUK =====
+        // ===== RENDER TABEL MASUK & KELUAR =====
         function renderMasukTable() {
             const search = (document.getElementById('searchMasuk')?.value || '').toLowerCase();
             const filterBulan = document.getElementById('filterBulanMasuk')?.value || '';
-
             let data = [...state.suratMasuk];
-
-            // Filter
-            if (search) {
-                data = data.filter(s =>
-                    s.nomorSurat.toLowerCase().includes(search) ||
-                    s.pengirim.toLowerCase().includes(search) ||
-                    s.perihal.toLowerCase().includes(search) ||
-                    (s.keterangan || '').toLowerCase().includes(search)
-                );
-            }
-            if (filterBulan) {
-                data = data.filter(s => s.tanggalSurat.startsWith(filterBulan));
-            }
-
-            // Urutkan terbaru dulu
+            if (search) data = data.filter(s => s.nomorSurat.toLowerCase().includes(search) || s.pengirim.toLowerCase().includes(search) || s.perihal.toLowerCase().includes(search));
+            if (filterBulan) data = data.filter(s => s.tanggalSurat.startsWith(filterBulan));
             data.reverse();
-
             const tbody = document.getElementById('tbodyMasuk');
             const emptyEl = document.getElementById('emptyMasuk');
-
-            if (data.length === 0) {
-                tbody.innerHTML = '';
-                emptyEl.classList.remove('hidden');
-            } else {
+            if (data.length === 0) { tbody.innerHTML = ''; emptyEl.classList.remove('hidden'); } 
+            else {
                 emptyEl.classList.add('hidden');
                 tbody.innerHTML = data.map((s, idx) => {
                     const origIdx = state.suratMasuk.indexOf(s);
-                    return `
-                    <tr class="border-t" style="border-color: var(--border);">
-                        <td class="px-5 py-3">
-                            <span class="font-mono text-xs font-semibold px-2 py-1 rounded badge-masuk">${escHtml(s.nomorSurat)}</span>
-                        </td>
-                        <td class="px-5 py-3 text-sm">${formatDate(s.tanggalSurat)}</td>
-                        <td class="px-5 py-3 text-sm">${formatDate(s.tanggalDiterima)}</td>
-                        <td class="px-5 py-3 text-sm font-medium">${escHtml(s.pengirim)}</td>
-                        <td class="px-5 py-3 text-sm">${escHtml(s.perihal)}</td>
-                        <td class="px-5 py-3">
-                            ${s.pdfLink ? `<a href="${s.pdfLink}" target="_blank" class="text-xs font-medium px-2 py-1 rounded inline-flex items-center gap-1" style="background: rgba(196,69,54,0.1); color: var(--danger);"><i class="fas fa-file-pdf"></i>Lihat</a>` : (s.fileName ? `<span class="text-xs" style="color: var(--text-muted);"><i class="fas fa-file-pdf"></i> ${escHtml(s.fileName)}</span>` : '<span class="text-xs" style="color: var(--border);">-</span>')}
-                        </td>
-                        <td class="px-5 py-3 text-center no-print">
-                            <button onclick="confirmDelete('masuk', ${origIdx})" class="w-8 h-8 rounded-lg inline-flex items-center justify-center hover:bg-red-50 transition-colors" title="Hapus">
-                                <i class="fas fa-trash-alt text-xs" style="color: var(--danger);"></i>
-                            </button>
-                        </td>
-                    </tr>`;
+                    return `<tr class="border-t" style="border-color: var(--border);">
+                        <td class="px-5 py-3"><span class="font-mono text-xs font-semibold px-2 py-1 rounded badge-masuk">${escHtml(s.nomorSurat)}</span></td>
+                        <td class="px-5 py-3 text-sm">${formatDate(s.tanggalSurat)}</td><td class="px-5 py-3 text-sm">${formatDate(s.tanggalDiterima)}</td>
+                        <td class="px-5 py-3 text-sm font-medium">${escHtml(s.pengirim)}</td><td class="px-5 py-3 text-sm">${escHtml(s.perihal)}</td>
+                        <td class="px-5 py-3">${s.pdfLink ? `<a href="${s.pdfLink}" target="_blank" class="text-xs font-medium px-2 py-1 rounded inline-flex items-center gap-1" style="background: rgba(196,69,54,0.1); color: var(--danger);"><i class="fas fa-file-pdf"></i>Lihat</a>` : (s.fileName ? `<span class="text-xs" style="color: var(--text-muted);"><i class="fas fa-file-pdf"></i></span>` : '-')}</td>
+                        <td class="px-5 py-3 text-center no-print"><button onclick="confirmDelete('masuk', ${origIdx})" class="w-8 h-8 rounded-lg inline-flex items-center justify-center hover:bg-red-50" title="Hapus"><i class="fas fa-trash-alt text-xs" style="color: var(--danger);"></i></button></td></tr>`;
                 }).join('');
             }
         }
 
-        // ===== RENDER TABEL KELUAR =====
         function renderKeluarTable() {
             const search = (document.getElementById('searchKeluar')?.value || '').toLowerCase();
             const filterBulan = document.getElementById('filterBulanKeluar')?.value || '';
-
             let data = [...state.suratKeluar];
-
-            if (search) {
-                data = data.filter(s =>
-                    s.nomorSurat.toLowerCase().includes(search) ||
-                    s.tujuan.toLowerCase().includes(search) ||
-                    s.perihal.toLowerCase().includes(search) ||
-                    (s.keterangan || '').toLowerCase().includes(search)
-                );
-            }
-            if (filterBulan) {
-                data = data.filter(s => s.tanggalSurat.startsWith(filterBulan));
-            }
-
+            if (search) data = data.filter(s => s.nomorSurat.toLowerCase().includes(search) || s.tujuan.toLowerCase().includes(search) || s.perihal.toLowerCase().includes(search));
+            if (filterBulan) data = data.filter(s => s.tanggalSurat.startsWith(filterBulan));
             data.reverse();
-
             const tbody = document.getElementById('tbodyKeluar');
             const emptyEl = document.getElementById('emptyKeluar');
-
-            if (data.length === 0) {
-                tbody.innerHTML = '';
-                emptyEl.classList.remove('hidden');
-            } else {
+            if (data.length === 0) { tbody.innerHTML = ''; emptyEl.classList.remove('hidden'); } 
+            else {
                 emptyEl.classList.add('hidden');
                 tbody.innerHTML = data.map((s, idx) => {
                     const origIdx = state.suratKeluar.indexOf(s);
-                    return `
-                    <tr class="border-t" style="border-color: var(--border);">
-                        <td class="px-5 py-3">
-                            <span class="font-mono text-xs font-semibold px-2 py-1 rounded badge-keluar">${escHtml(s.nomorSurat)}</span>
-                        </td>
-                        <td class="px-5 py-3 text-sm">${formatDate(s.tanggalSurat)}</td>
-                        <td class="px-5 py-3 text-sm font-medium">${escHtml(s.tujuan)}</td>
+                    return `<tr class="border-t" style="border-color: var(--border);">
+                        <td class="px-5 py-3"><span class="font-mono text-xs font-semibold px-2 py-1 rounded badge-keluar">${escHtml(s.nomorSurat)}</span></td>
+                        <td class="px-5 py-3 text-sm">${formatDate(s.tanggalSurat)}</td><td class="px-5 py-3 text-sm font-medium">${escHtml(s.tujuan)}</td>
                         <td class="px-5 py-3 text-sm">${escHtml(s.perihal)}</td>
-                        <td class="px-5 py-3">
-                            ${s.pdfLink ? `<a href="${s.pdfLink}" target="_blank" class="text-xs font-medium px-2 py-1 rounded inline-flex items-center gap-1" style="background: rgba(196,69,54,0.1); color: var(--danger);"><i class="fas fa-file-pdf"></i>Lihat</a>` : (s.fileName ? `<span class="text-xs" style="color: var(--text-muted);"><i class="fas fa-file-pdf"></i> ${escHtml(s.fileName)}</span>` : '<span class="text-xs" style="color: var(--border);">-</span>')}
-                        </td>
-                        <td class="px-5 py-3 text-center no-print">
-                            <button onclick="confirmDelete('keluar', ${origIdx})" class="w-8 h-8 rounded-lg inline-flex items-center justify-center hover:bg-red-50 transition-colors" title="Hapus">
-                                <i class="fas fa-trash-alt text-xs" style="color: var(--danger);"></i>
-                            </button>
-                        </td>
-                    </tr>`;
+                        <td class="px-5 py-3">${s.pdfLink ? `<a href="${s.pdfLink}" target="_blank" class="text-xs font-medium px-2 py-1 rounded inline-flex items-center gap-1" style="background: rgba(196,69,54,0.1); color: var(--danger);"><i class="fas fa-file-pdf"></i>Lihat</a>` : (s.fileName ? `<span class="text-xs" style="color: var(--text-muted);"><i class="fas fa-file-pdf"></i></span>` : '-')}</td>
+                        <td class="px-5 py-3 text-center no-print"><button onclick="confirmDelete('keluar', ${origIdx})" class="w-8 h-8 rounded-lg inline-flex items-center justify-center hover:bg-red-50" title="Hapus"><i class="fas fa-trash-alt text-xs" style="color: var(--danger);"></i></button></td></tr>`;
                 }).join('');
             }
         }
 
-        // ===== MODAL =====
+        // ===== MODAL & FORM =====
         function openModal(type) {
             state.modalType = type;
             state.selectedFile = null;
             state.selectedFileBase64 = null;
-
-            // Set judul
-            const title = type === 'masuk' ? 'Tambah Surat Masuk' : 'Tambah Surat Keluar';
-            document.getElementById('modalTitle').textContent = title;
-
-            // Generate nomor surat otomatis
-            const nomor = generateNomorSurat(type);
-            document.getElementById('fNomorSurat').value = nomor;
-
-            // Set tanggal hari ini
+            document.getElementById('modalTitle').textContent = type === 'masuk' ? 'Tambah Surat Masuk' : 'Tambah Surat Keluar';
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('fTanggalSurat').value = today;
             document.getElementById('fTanggalDiterima').value = today;
+            
+            if (type === 'masuk') { document.getElementById('fieldTanggalDiterima').classList.remove('hidden'); document.getElementById('fieldPengirim').classList.remove('hidden'); document.getElementById('fieldTujuan').classList.add('hidden'); } 
+            else { document.getElementById('fieldTanggalDiterima').classList.add('hidden'); document.getElementById('fieldPengirim').classList.add('hidden'); document.getElementById('fieldTujuan').classList.remove('hidden'); }
 
-            // Tampilkan/sembunyikan field sesuai tipe
-            if (type === 'masuk') {
-                document.getElementById('fieldTanggalDiterima').classList.remove('hidden');
-                document.getElementById('fieldPengirim').classList.remove('hidden');
-                document.getElementById('fieldTujuan').classList.add('hidden');
-            } else {
-                document.getElementById('fieldTanggalDiterima').classList.add('hidden');
-                document.getElementById('fieldPengirim').classList.add('hidden');
-                document.getElementById('fieldTujuan').classList.remove('hidden');
-            }
-
-            // Reset form
             document.getElementById('fPerihal').value = '';
             document.getElementById('fKeterangan').value = '';
             document.getElementById('fPengirim').value = '';
             document.getElementById('fTujuan').value = '';
             removeFile();
+            
+            populateKlasifikasiDropdown();
+            updateNomorSurat(); // Generate nomor awal
 
-            // Tampilkan modal
             document.getElementById('modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.add('hidden');
-            document.body.style.overflow = '';
-            state.modalType = null;
-        }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); document.body.style.overflow = ''; state.modalType = null; }
 
         // ===== FILE UPLOAD =====
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            processFile(file);
-        }
-
-        function handleDragOver(event) {
-            event.preventDefault();
-            event.currentTarget.classList.add('dragover');
-        }
-
-        function handleDragLeave(event) {
-            event.currentTarget.classList.remove('dragover');
-        }
-
-        function handleDrop(event) {
-            event.preventDefault();
-            event.currentTarget.classList.remove('dragover');
-            const file = event.dataTransfer.files[0];
-            if (file) processFile(file);
-        }
+        function handleFileSelect(event) { const file = event.target.files[0]; if (file) processFile(file); }
+        function handleDragOver(event) { event.preventDefault(); event.currentTarget.classList.add('dragover'); }
+        function handleDragLeave(event) { event.currentTarget.classList.remove('dragover'); }
+        function handleDrop(event) { event.preventDefault(); event.currentTarget.classList.remove('dragover'); const file = event.dataTransfer.files[0]; if (file) processFile(file); }
 
         function processFile(file) {
-            // Validasi tipe file
-            if (file.type !== 'application/pdf') {
-                showToast('Hanya file PDF yang diizinkan', 'error');
-                return;
-            }
-            // Validasi ukuran (maks 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                showToast('Ukuran file maksimal 5 MB', 'error');
-                return;
-            }
-
+            if (file.type !== 'application/pdf') { showToast('Hanya file PDF yang diizinkan', 'error'); return; }
+            if (file.size > 5 * 1024 * 1024) { showToast('Ukuran file maksimal 5 MB', 'error'); return; }
             state.selectedFile = file;
-
-            // Baca sebagai base64 untuk dikirim ke Apps Script
             const reader = new FileReader();
-            reader.onload = function(e) {
-                state.selectedFileBase64 = e.target.result.split(',')[1]; // Hapus prefix data:...
-            };
+            reader.onload = (e) => state.selectedFileBase64 = e.target.result.split(',')[1];
             reader.readAsDataURL(file);
-
-            // Tampilkan info file
             document.getElementById('fileName').textContent = file.name + ' (' + formatFileSize(file.size) + ')';
             document.getElementById('fileInfo').classList.remove('hidden');
             document.getElementById('uploadArea').classList.add('has-file');
         }
 
-        function removeFile() {
-            state.selectedFile = null;
-            state.selectedFileBase64 = null;
-            document.getElementById('fPDF').value = '';
-            document.getElementById('fileInfo').classList.add('hidden');
-            document.getElementById('uploadArea').classList.remove('has-file');
-        }
+        function removeFile() { state.selectedFile = null; state.selectedFileBase64 = null; document.getElementById('fPDF').value = ''; document.getElementById('fileInfo').classList.add('hidden'); document.getElementById('uploadArea').classList.remove('has-file'); }
 
         // ===== SUBMIT FORM =====
         async function handleSubmit(event) {
             event.preventDefault();
             const type = state.modalType;
-            if (!type) return;
-
             const btnSubmit = document.getElementById('btnSubmit');
-            btnSubmit.disabled = true;
-            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
+            btnSubmit.disabled = true; btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
 
             try {
                 const nomorSurat = document.getElementById('fNomorSurat').value;
                 const tanggalSurat = document.getElementById('fTanggalSurat').value;
                 const perihal = document.getElementById('fPerihal').value;
                 const keterangan = document.getElementById('fKeterangan').value;
+                const klasifikasi = document.getElementById('fKlasifikasi').value;
 
-                // Validasi
-                if (!tanggalSurat || !perihal) {
-                    showToast('Lengkapi field yang wajib diisi', 'error');
-                    btnSubmit.disabled = false;
-                    btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan';
-                    return;
-                }
+                if (!tanggalSurat || !perihal) { showToast('Lengkapi field yang wajib diisi', 'error'); btnSubmit.disabled = false; btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan'; return; }
 
                 if (type === 'masuk') {
                     const tanggalDiterima = document.getElementById('fTanggalDiterima').value;
                     const pengirim = document.getElementById('fPengirim').value;
-                    if (!tanggalDiterima || !pengirim) {
-                        showToast('Lengkapi tanggal diterima dan pengirim', 'error');
-                        btnSubmit.disabled = false;
-                        btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan';
-                        return;
-                    }
-
-                    const entry = {
-                        id: Date.now(),
-                        nomorSurat,
-                        tanggalSurat,
-                        tanggalDiterima,
-                        pengirim,
-                        perihal,
-                        keterangan,
-                        fileName: state.selectedFile ? state.selectedFile.name : '',
-                        pdfLink: ''
-                    };
+                    if (!tanggalDiterima || !pengirim) { showToast('Lengkapi tanggal diterima dan pengirim', 'error'); btnSubmit.disabled = false; btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan'; return; }
+                    const entry = { id: Date.now(), nomorSurat, tanggalSurat, tanggalDiterima, pengirim, perihal, klasifikasi, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
 
                     if (state.appsScriptUrl) {
-                        // Kirim ke Google Spreadsheet
-                        const payload = {
-                            type: 'masuk',
-                            nomorSurat,
-                            tanggalSurat,
-                            tanggalDiterima,
-                            pengirim,
-                            perihal,
-                            keterangan,
-                            pdfBase64: state.selectedFileBase64 || ''
-                        };
-                        const result = await apiPost(payload);
-                        if (result && result.success) {
-                            showToast('Surat masuk berhasil disimpan ke Spreadsheet', 'success');
-                            await fetchSpreadsheetData();
-                        } else {
-                            throw new Error(result ? result.error : 'Gagal menyimpan');
-                        }
-                    } else {
-                        // Simpan lokal
-                        state.suratMasuk.push(entry);
-                        saveLocalData('masuk');
-                        showToast('Surat masuk berhasil disimpan secara lokal', 'success');
-                    }
-
+                        const result = await apiPost({ type: 'masuk', nomorSurat, tanggalSurat, tanggalDiterima, pengirim, perihal, klasifikasi, keterangan, pdfBase64: state.selectedFileBase64 || '' });
+                        if (result && result.success) { showToast('Surat masuk berhasil disimpan ke Spreadsheet', 'success'); await fetchSpreadsheetData(); } else throw new Error(result ? result.error : 'Gagal menyimpan');
+                    } else { state.suratMasuk.push(entry); saveLocalData('masuk'); showToast('Surat masuk berhasil disimpan secara lokal', 'success'); }
                 } else {
                     const tujuan = document.getElementById('fTujuan').value;
-                    if (!tujuan) {
-                        showToast('Lengkapi tujuan surat', 'error');
-                        btnSubmit.disabled = false;
-                        btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan';
-                        return;
-                    }
-
-                    const entry = {
-                        id: Date.now(),
-                        nomorSurat,
-                        tanggalSurat,
-                        tujuan,
-                        perihal,
-                        keterangan,
-                        fileName: state.selectedFile ? state.selectedFile.name : '',
-                        pdfLink: ''
-                    };
+                    if (!tujuan) { showToast('Lengkapi tujuan surat', 'error'); btnSubmit.disabled = false; btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan'; return; }
+                    const entry = { id: Date.now(), nomorSurat, tanggalSurat, tujuan, perihal, klasifikasi, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
 
                     if (state.appsScriptUrl) {
-                        const payload = {
-                            type: 'keluar',
-                            nomorSurat,
-                            tanggalSurat,
-                            tujuan,
-                            perihal,
-                            keterangan,
-                            pdfBase64: state.selectedFileBase64 || ''
-                        };
-                        const result = await apiPost(payload);
-                        if (result && result.success) {
-                            showToast('Surat keluar berhasil disimpan ke Spreadsheet', 'success');
-                            await fetchSpreadsheetData();
-                        } else {
-                            throw new Error(result ? result.error : 'Gagal menyimpan');
-                        }
-                    } else {
-                        state.suratKeluar.push(entry);
-                        saveLocalData('keluar');
-                        showToast('Surat keluar berhasil disimpan secara lokal', 'success');
-                    }
+                        const result = await apiPost({ type: 'keluar', nomorSurat, tanggalSurat, tujuan, perihal, klasifikasi, keterangan, pdfBase64: state.selectedFileBase64 || '' });
+                        if (result && result.success) { showToast('Surat keluar berhasil disimpan ke Spreadsheet', 'success'); await fetchSpreadsheetData(); } else throw new Error(result ? result.error : 'Gagal menyimpan');
+                    } else { state.suratKeluar.push(entry); saveLocalData('keluar'); showToast('Surat keluar berhasil disimpan secara lokal', 'success'); }
                 }
 
                 closeModal();
-                // Refresh view
                 if (state.currentView === 'dashboard') renderDashboard();
                 else if (state.currentView === 'masuk') renderMasukTable();
                 else if (state.currentView === 'keluar') renderKeluarTable();
-
-            } catch (err) {
-                showToast('Error: ' + err.message, 'error');
-            } finally {
-                btnSubmit.disabled = false;
-                btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan';
-            }
+            } catch (err) { showToast('Error: ' + err.message, 'error'); } 
+            finally { btnSubmit.disabled = false; btnSubmit.innerHTML = '<i class="fas fa-save"></i> Simpan'; }
         }
 
         // ===== HAPUS DATA =====
-        function confirmDelete(type, index) {
-            state.deleteTarget = { type, index };
-            document.getElementById('confirmDialog').classList.remove('hidden');
-            document.getElementById('btnConfirmDelete').onclick = executeDelete;
-        }
-
-        function closeConfirm() {
-            document.getElementById('confirmDialog').classList.add('hidden');
-            state.deleteTarget = null;
-        }
-
+        function confirmDelete(type, index) { state.deleteTarget = { type, index }; document.getElementById('confirmDialog').classList.remove('hidden'); document.getElementById('btnConfirmDelete').onclick = executeDelete; }
+        function closeConfirm() { document.getElementById('confirmDialog').classList.add('hidden'); state.deleteTarget = null; }
         function executeDelete() {
             if (!state.deleteTarget) return;
             const { type, index } = state.deleteTarget;
-
-            if (type === 'masuk') {
-                state.suratMasuk.splice(index, 1);
-                saveLocalData('masuk');
-            } else {
-                state.suratKeluar.splice(index, 1);
-                saveLocalData('keluar');
-            }
-
-            closeConfirm();
-            showToast('Surat berhasil dihapus', 'success');
-
-            // Refresh
+            if (type === 'masuk') { state.suratMasuk.splice(index, 1); saveLocalData('masuk'); } 
+            else { state.suratKeluar.splice(index, 1); saveLocalData('keluar'); }
+            closeConfirm(); showToast('Surat berhasil dihapus', 'success');
             if (state.currentView === 'dashboard') renderDashboard();
             else if (state.currentView === 'masuk') renderMasukTable();
             else if (state.currentView === 'keluar') renderKeluarTable();
@@ -1461,200 +856,113 @@ function setupSheets() {
         function initPengaturan() {
             document.getElementById('inputAppsScriptUrl').value = state.appsScriptUrl;
             document.getElementById('scriptCode').textContent = APPS_SCRIPT_CODE;
+            renderKlasifikasiTable();
         }
 
         function saveConfig() {
             const url = document.getElementById('inputAppsScriptUrl').value.trim();
-            state.appsScriptUrl = url;
-            localStorage.setItem(`${APP_KEY}-url`, url);
-            updateDemoBanner();
-
-            if (url) {
-                showToast('URL berhasil disimpan. Memuat data dari Spreadsheet...', 'success');
-                fetchSpreadsheetData().then(() => {
-                    if (state.currentView === 'dashboard') renderDashboard();
-                });
-            } else {
-                showToast('Koneksi Spreadsheet dilepas. Data disimpan lokal.', 'info');
-            }
+            state.appsScriptUrl = url; localStorage.setItem(`${APP_KEY}-url`, url);
+            if (url) { showToast('URL disimpan. Memuat data...', 'success'); fetchSpreadsheetData().then(() => renderDashboard()); } 
+            else { showToast('Koneksi dilepas. Data disimpan lokal.', 'info'); }
         }
 
         async function testConnection() {
-            if (!state.appsScriptUrl) {
-                showToast('Masukkan URL terlebih dahulu', 'error');
-                return;
-            }
-
-            const statusEl = document.getElementById('connectionStatus');
-            const iconEl = document.getElementById('connIcon');
-            const textEl = document.getElementById('connText');
-            statusEl.classList.remove('hidden');
-            iconEl.className = 'fas fa-spinner fa-spin';
-            iconEl.style.color = 'var(--accent)';
-            textEl.textContent = 'Menguji koneksi...';
-            textEl.style.color = 'var(--text)';
-
+            if (!state.appsScriptUrl) { showToast('Masukkan URL terlebih dahulu', 'error'); return; }
+            const sEl = document.getElementById('connectionStatus'), iEl = document.getElementById('connIcon'), tEl = document.getElementById('connText');
+            sEl.classList.remove('hidden'); iEl.className = 'fas fa-spinner fa-spin'; iEl.style.color = 'var(--accent)'; tEl.textContent = 'Menguji koneksi...';
             try {
                 const result = await apiGet('ping');
-                if (result && result.success) {
-                    iconEl.className = 'fas fa-check-circle';
-                    iconEl.style.color = 'var(--success)';
-                    textEl.textContent = 'Koneksi berhasil! Spreadsheet terhubung.';
-                    textEl.style.color = 'var(--success)';
-                    statusEl.querySelector('div').style.background = 'rgba(45,143,78,0.06)';
-                } else {
-                    throw new Error('Respons tidak valid');
-                }
-            } catch (err) {
-                iconEl.className = 'fas fa-times-circle';
-                iconEl.style.color = 'var(--danger)';
-                textEl.textContent = 'Koneksi gagal. Pastikan URL benar dan script sudah di-deploy dengan benar.';
-                textEl.style.color = 'var(--danger)';
-                statusEl.querySelector('div').style.background = 'rgba(196,69,54,0.06)';
-            }
+                if (result && result.success) { iEl.className = 'fas fa-check-circle'; iEl.style.color = 'var(--success)'; tEl.textContent = 'Koneksi berhasil!'; tEl.style.color = 'var(--success)'; sEl.querySelector('div').style.background = 'rgba(45,143,78,0.06)'; } 
+                else throw new Error();
+            } catch { iEl.className = 'fas fa-times-circle'; iEl.style.color = 'var(--danger)'; tEl.textContent = 'Koneksi gagal.'; tEl.style.color = 'var(--danger)'; sEl.querySelector('div').style.background = 'rgba(196,69,54,0.06)'; }
         }
 
-        function copyScript() {
-            navigator.clipboard.writeText(APPS_SCRIPT_CODE).then(() => {
-                showToast('Kode berhasil disalin ke clipboard', 'success');
-            }).catch(() => {
-                // Fallback
-                const textarea = document.createElement('textarea');
-                textarea.value = APPS_SCRIPT_CODE;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast('Kode berhasil disalin ke clipboard', 'success');
+        function copyScript() { navigator.clipboard.writeText(APPS_SCRIPT_CODE).then(() => showToast('Kode berhasil disalin', 'success')); }
+
+        // ===== PENGELOLAAN KLASIFIKASI =====
+        function addClassification() {
+            const keywordInput = document.getElementById('inputKeyword');
+            const codeInput = document.getElementById('inputCode');
+            const keyword = keywordInput.value.trim().toLowerCase();
+            const code = codeInput.value.trim().toUpperCase();
+
+            if (!keyword || !code) { showToast('Kata kunci dan kode wajib diisi', 'error'); return; }
+            if (code.length > 5) { showToast('Kode maksimal 5 karakter', 'error'); return; }
+
+            state.klasifikasi.push({ keyword, code });
+            saveKlasifikasi();
+            keywordInput.value = ''; codeInput.value = '';
+            renderKlasifikasiTable();
+            showToast(`Klasifikasi ${code} berhasil ditambahkan`, 'success');
+        }
+
+        function removeClassification(index) {
+            state.klasifikasi.splice(index, 1);
+            saveKlasifikasi();
+            renderKlasifikasiTable();
+        }
+
+        function renderKlasifikasiTable() {
+            const tbody = document.getElementById('tbodyKlasifikasi');
+            const defaultCodeMasuk = 'SM', defaultCodeKeluar = 'SK';
+            const year = new Date().getFullYear();
+            
+            let html = `
+                <tr class="border-t" style="border-color: var(--border);">
+                    <td class="px-4 py-3 text-sm italic" style="color: var(--text-muted);">Default (Tanpa kata kunci)</td>
+                    <td class="px-4 py-3"><span class="font-mono text-xs font-semibold px-2 py-0.5 rounded badge-masuk">SM</span> / <span class="font-mono text-xs font-semibold px-2 py-0.5 rounded badge-keluar">SK</span></td>
+                    <td class="px-4 py-3 text-xs font-mono" style="color: var(--text-muted);">001/SM/${year}</td>
+                    <td class="px-4 py-3"></td>
+                </tr>`;
+            
+            state.klasifikasi.forEach((k, idx) => {
+                html += `<tr class="border-t" style="border-color: var(--border);">
+                    <td class="px-4 py-3 text-sm font-medium">${capitalizeFirst(k.keyword)}</td>
+                    <td class="px-4 py-3"><span class="font-mono text-xs font-semibold px-2 py-0.5 rounded" style="background: rgba(22,105,122,0.1); color: var(--primary);">${k.code}</span></td>
+                    <td class="px-4 py-3 text-xs font-mono" style="color: var(--text-muted);">001/${k.code}/${year}</td>
+                    <td class="px-4 py-3 text-right"><button onclick="removeClassification(${idx})" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color: var(--danger);"><i class="fas fa-times"></i></button></td>
+                </tr>`;
             });
+            tbody.innerHTML = html;
         }
 
         // ===== TOAST =====
         function showToast(message, type = 'info') {
             const container = document.getElementById('toastContainer');
             const toast = document.createElement('div');
-
-            const icons = {
-                success: 'fa-check-circle',
-                error: 'fa-exclamation-circle',
-                info: 'fa-info-circle',
-                warning: 'fa-exclamation-triangle'
-            };
-            const colors = {
-                success: 'var(--success)',
-                error: 'var(--danger)',
-                info: 'var(--primary)',
-                warning: 'var(--warning)'
-            };
-            const bgColors = {
-                success: 'rgba(45,143,78,0.08)',
-                error: 'rgba(196,69,54,0.08)',
-                info: 'rgba(22,105,122,0.08)',
-                warning: 'rgba(212,152,61,0.08)'
-            };
-
+            const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle', warning: 'fa-exclamation-triangle' };
+            const colors = { success: 'var(--success)', error: 'var(--danger)', info: 'var(--primary)', warning: 'var(--warning)' };
+            const bgColors = { success: 'rgba(45,143,78,0.08)', error: 'rgba(196,69,54,0.08)', info: 'rgba(22,105,122,0.08)', warning: 'rgba(212,152,61,0.08)' };
             toast.className = 'toast-item flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border';
             toast.style.cssText = `background: white; border-color: var(--border); min-width: 280px;`;
-            toast.innerHTML = `
-                <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: ${bgColors[type]};">
-                    <i class="fas ${icons[type]}" style="color: ${colors[type]};"></i>
-                </div>
-                <span class="text-sm flex-1" style="color: var(--text);">${escHtml(message)}</span>
-                <button onclick="this.parentElement.classList.add('removing'); setTimeout(()=>this.parentElement.remove(),300);" class="flex-shrink-0 w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100">
-                    <i class="fas fa-times text-xs" style="color: var(--text-muted);"></i>
-                </button>
-            `;
-
+            toast.innerHTML = `<div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: ${bgColors[type]};"><i class="fas ${icons[type]}" style="color: ${colors[type]};"></i></div><span class="text-sm flex-1" style="color: var(--text);">${escHtml(message)}</span><button onclick="this.parentElement.classList.add('removing'); setTimeout(()=>this.parentElement.remove(),300);" class="flex-shrink-0 w-6 h-6 rounded flex items-center justify-center hover:bg-gray-100"><i class="fas fa-times text-xs" style="color: var(--text-muted);"></i></button>`;
             container.appendChild(toast);
-
-            // Auto-remove setelah 4 detik
-            setTimeout(() => {
-                if (toast.parentElement) {
-                    toast.classList.add('removing');
-                    setTimeout(() => toast.remove(), 300);
-                }
-            }, 4000);
+            setTimeout(() => { if (toast.parentElement) { toast.classList.add('removing'); setTimeout(() => toast.remove(), 300); } }, 4000);
         }
 
         // ===== UTILITAS =====
-        function escHtml(str) {
-            if (!str) return '';
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        function formatDate(dateStr) {
-            if (!dateStr) return '-';
-            try {
-                const d = new Date(dateStr);
-                if (isNaN(d.getTime())) return dateStr;
-                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-                return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-            } catch {
-                return dateStr;
-            }
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes < 1024) return bytes + ' B';
-            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-        }
-
-        function animateCounter(elementId, target) {
-            const el = document.getElementById(elementId);
-            if (!el) return;
-            const duration = 600;
-            const startTime = performance.now();
-            const startVal = parseInt(el.textContent) || 0;
-
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                // Ease out
-                const eased = 1 - Math.pow(1 - progress, 3);
-                const current = Math.round(startVal + (target - startVal) * eased);
-                el.textContent = current;
-                if (progress < 1) requestAnimationFrame(update);
-            }
+        function escHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
+        function formatDate(dateStr) { if (!dateStr) return '-'; try { const d = new Date(dateStr); if (isNaN(d.getTime())) return dateStr; const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']; return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`; } catch { return dateStr; } }
+        function formatFileSize(bytes) { if (bytes < 1024) return bytes + ' B'; if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
+        
+        function animateCounter(elId, target) {
+            const el = document.getElementById(elId); if (!el) return;
+            const duration = 600, startTime = performance.now(), startVal = parseInt(el.textContent) || 0;
+            function update(t) { const p = Math.min((t - startTime) / duration, 1); el.textContent = Math.round(startVal + (target - startVal) * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(update); }
             requestAnimationFrame(update);
         }
 
-        function updateDemoBanner() {
-            const banner = document.getElementById('demoBanner');
-            if (state.appsScriptUrl) {
-                banner.classList.add('hidden');
-            } else {
-                banner.classList.remove('hidden');
-            }
-        }
+        function updateDemoBanner() { document.getElementById('demoBanner').classList.toggle('hidden', !!state.appsScriptUrl); }
 
         // ===== INISIALISASI =====
         async function init() {
-            updateDemoBanner();
-            initPengaturan();
-            renderDashboard();
-
-            // Jika ada URL Spreadsheet, fetch data
-            if (state.appsScriptUrl) {
-                await fetchSpreadsheetData();
-                renderDashboard();
-            }
+            updateDemoBanner(); initPengaturan(); renderDashboard();
+            if (state.appsScriptUrl) { await fetchSpreadsheetData(); renderDashboard(); }
         }
 
-        // Jalankan saat halaman dimuat
         document.addEventListener('DOMContentLoaded', init);
-
-        // Keyboard shortcut: Escape untuk tutup modal
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if (!document.getElementById('confirmDialog').classList.contains('hidden')) {
-                    closeConfirm();
-                } else if (!document.getElementById('modal').classList.contains('hidden')) {
-                    closeModal();
-                }
-            }
+            if (e.key === 'Escape') { if (!document.getElementById('confirmDialog').classList.contains('hidden')) closeConfirm(); else if (!document.getElementById('modal').classList.contains('hidden')) closeModal(); }
         });
     </script>
 </body>
