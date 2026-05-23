@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Arsip — Pencatat Surat Masuk & Keluar</title>
+    <title>E-Arsip KORPRI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -49,7 +49,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--accent);"><i class="fas fa-archive text-white text-lg"></i></div>
-                    <div><h1 class="text-xl text-white leading-tight">E-Arsip</h1><p class="text-xs text-teal-200 -mt-0.5">Pencatat Surat Masuk & Keluar</p></div>
+                    <div><h1 class="text-xl text-white leading-tight">E-Arsip</h1><p class="text-xs text-teal-200 -mt-0.5">Digitalisasi Persurata KORPRI</p></div>
                 </div>
                 <nav class="flex items-center gap-1 sm:gap-2">
                     <button onclick="switchView('dashboard')" class="tab-btn active text-white/80 px-3 py-2 text-sm rounded-lg hover:bg-white/10" data-tab="dashboard"><i class="fas fa-chart-pie mr-1 hidden sm:inline"></i>Dashboard</button>
@@ -95,7 +95,6 @@
         <div id="viewPengaturan" class="view hidden">
             <div class="mb-6 animate-fade-in-up"><h2 class="text-2xl sm:text-3xl font-bold" style="color: var(--primary-dark);">Pengaturan</h2><p class="text-sm mt-1" style="color: var(--text-muted);">Kustomisasi format dan koneksi</p></div>
             
-            <!-- Koneksi & Klasifikasi -->
             <div class="grid lg:grid-cols-5 gap-6 mb-6">
                 <div class="lg:col-span-2 animate-fade-in-up stagger-1">
                     <div class="bg-white rounded-xl shadow-sm border p-6">
@@ -109,10 +108,9 @@
                 <div class="lg:col-span-3 animate-fade-in-up stagger-2">
                     <div class="bg-white rounded-xl shadow-sm border p-6">
                         <h3 class="text-lg font-bold mb-2" style="color: var(--primary);"><i class="fas fa-tags mr-2"></i>Klasifikasi Penomoran</h3>
-                        <p class="text-sm mb-4" style="color: var(--text-muted);">Deteksi otomatis dari perihal surat. Kode klasifikasi tidak dibatasi jumlah karakternya.</p>
+                        <p class="text-sm mb-4" style="color: var(--text-muted);">Deteksi otomatis dari perihal surat. Kode tidak dibatasi jumlah karakter.</p>
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="inputKeyword" placeholder="Kata kunci (misal: Undangan)" class="form-input flex-1 px-3 py-2 rounded-lg border text-sm" style="border-color: var(--border);">
-                            <!-- Perubahan: maxlength dihapus, width diperbesar menjadi w-40 -->
                             <input type="text" id="inputCode" placeholder="Kode (misal: UND)" class="form-input w-40 px-3 py-2 rounded-lg border text-sm uppercase text-center font-semibold" style="border-color: var(--border);">
                             <button onclick="addClassification()" class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold"><i class="fas fa-plus"></i></button>
                         </div>
@@ -124,35 +122,34 @@
             <!-- Template Format Nomor Surat -->
             <div class="bg-white rounded-xl shadow-sm border p-6 mb-6 animate-fade-in-up stagger-3">
                 <h3 class="text-lg font-bold mb-2" style="color: var(--primary);"><i class="fas fa-pencil-ruler mr-2"></i>Format Penomoran Surat</h3>
-                <p class="text-sm mb-4" style="color: var(--text-muted);">Susun elemen penomoran sesuai kebutuhan instansi Anda.</p>
+                <p class="text-sm mb-4" style="color: var(--text-muted);">Nomor urut ({no}) akan otomatis reset ke 001 setiap pergantian bulan jika format mengandung elemen bulan.</p>
                 
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-sm font-semibold mb-2" style="color: var(--masuk);">Surat Masuk</label>
                         <input type="text" id="inputFormatMasuk" oninput="updatePreview('masuk')" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm font-mono" style="border-color: var(--border);">
-                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(22,105,122,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewMasuk" class="font-mono font-semibold" style="color: var(--masuk);">001/SM/2024</span></div>
+                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(22,105,122,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewMasuk" class="font-mono font-semibold" style="color: var(--masuk);">001/SM/I/2024</span></div>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2" style="color: var(--keluar);">Surat Keluar</label>
                         <input type="text" id="inputFormatKeluar" oninput="updatePreview('keluar')" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm font-mono" style="border-color: var(--border);">
-                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(184,114,45,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewKeluar" class="font-mono font-semibold" style="color: var(--keluar);">001/SK/2024</span></div>
+                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(184,114,45,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewKeluar" class="font-mono font-semibold" style="color: var(--keluar);">001/SK/I/2024</span></div>
                     </div>
                 </div>
 
                 <div class="mt-4 p-4 rounded-lg border border-dashed" style="border-color: var(--border); background: rgba(255,255,255,0.5);">
                     <h4 class="text-sm font-semibold mb-2">Variabel yang Tersedia:</h4>
-                    <div class="flex flex-wrap gap-2 text-xs">
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{no}</code><span class="self-center">Nomor urut</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{kode}</code><span class="self-center">Kode klasifikasi</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{tahun}</code><span class="self-center">Tahun 4 digit</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{bulan}</code><span class="self-center">Bulan 2 digit</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{romawi}</code><span class="self-center">Bulan Romawi</span>
+                    <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs">
+                        <div><code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{no}</code> Nomor urut (reset per bulan)</div>
+                        <div><code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{kode}</code> Kode klasifikasi</div>
+                        <div><code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{tahun}</code> Tahun 4 digit</div>
+                        <div><code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{bulan}</code> Bulan 2 digit</div>
+                        <div><code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{romawi}</code> Bulan Romawi</div>
                     </div>
                 </div>
                 <div class="mt-4 text-right"><button onclick="saveFormats()" class="btn-primary px-5 py-2.5 rounded-lg font-semibold text-sm"><i class="fas fa-save mr-1"></i> Simpan Format</button></div>
             </div>
 
-            <!-- Panduan Script -->
             <div class="bg-white rounded-xl shadow-sm border p-6 animate-fade-in-up stagger-4">
                 <h3 class="text-lg font-bold mb-4" style="color: var(--primary);"><i class="fas fa-book mr-2"></i>Panduan Google Apps Script</h3>
                 <div class="relative"><button onclick="copyScript()" class="absolute top-2 right-2 text-xs px-3 py-1 rounded-md font-medium hover:opacity-80 z-10" style="background: var(--primary); color: white;"><i class="fas fa-copy mr-1"></i>Salin</button><pre id="scriptCode" class="text-xs p-4 rounded-lg overflow-x-auto max-h-72" style="background: #1C1C28; color: #E0D8CE; line-height: 1.6;"></pre></div>
@@ -179,7 +176,6 @@
         </div>
     </div>
 
-    <!-- KONFIRMASI HAPUS -->
     <div id="confirmDialog" class="fixed inset-0 z-[60] hidden"><div class="confirm-overlay absolute inset-0"></div><div class="relative z-10 w-full max-w-sm mx-auto mt-[30vh] bg-white rounded-2xl shadow-2xl p-6 animate-scale-in"><div class="text-center mb-5"><div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background: rgba(196,69,54,0.1);"><i class="fas fa-trash-alt text-xl" style="color: var(--danger);"></i></div><h3 class="text-lg font-bold">Hapus Surat?</h3><p class="text-sm mt-1" style="color: var(--text-muted);">Data yang dihapus tidak dapat dikembalikan.</p></div><div class="flex gap-3"><button onclick="closeConfirm()" class="flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color: var(--border);">Batal</button><button id="btnConfirmDelete" class="btn-danger flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm">Hapus</button></div></div></div>
 
     <div id="toastContainer" class="fixed bottom-6 right-6 z-[70] space-y-2 max-w-sm"></div>
@@ -190,8 +186,9 @@
             suratMasuk: JSON.parse(localStorage.getItem(`${APP_KEY}-masuk`) || '[]'),
             suratKeluar: JSON.parse(localStorage.getItem(`${APP_KEY}-keluar`) || '[]'),
             appsScriptUrl: localStorage.getItem(`${APP_KEY}-url`) || '',
-            formatMasuk: localStorage.getItem(`${APP_KEY}-fmt-masuk`) || '{no}/{kode}/{tahun}',
-            formatKeluar: localStorage.getItem(`${APP_KEY}-fmt-keluar`) || '{no}/{kode}/{tahun}',
+            // PERUBAHAN: Default format langsung menggunakan bulan romawi
+            formatMasuk: localStorage.getItem(`${APP_KEY}-fmt-masuk`) || '{no}/{kode}/{romawi}/{tahun}',
+            formatKeluar: localStorage.getItem(`${APP_KEY}-fmt-keluar`) || '{no}/{kode}/{romawi}/{tahun}',
             klasifikasi: JSON.parse(localStorage.getItem(`${APP_KEY}-klasifikasi`) || JSON.stringify([
                 { keyword: 'undangan', code: 'UND' }, { keyword: 'penugasan', code: 'TGS' }, { keyword: 'sppd', code: 'SPPD' }, { keyword: 'izin', code: 'IZN' }
             ])),
@@ -240,7 +237,6 @@ function setupSheets() {
   if (!keluar) { keluar = ss.insertSheet('Surat Keluar'); keluar.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tujuan','Perihal','Klasifikasi','Keterangan','Link PDF']); keluar.getRange(1,1,1,8).setFontWeight('bold').setBackground('#B8722D').setFontColor('#ffffff'); }
 }`;
 
-        // --- NAVIGASI ---
         function switchView(view) {
             state.currentView = view;
             document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
@@ -253,7 +249,7 @@ function setupSheets() {
             else if (view === 'pengaturan') initPengaturan();
         }
 
-        // --- LOGIKA PENOMORAN ---
+        // --- LOGIKA PENOMORAN (DENGAN RESET PER BULAN) ---
         function getRomawi(month) {
             const m = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
             return m[month - 1] || '';
@@ -264,16 +260,31 @@ function setupSheets() {
             const template = type === 'masuk' ? state.formatMasuk : state.formatKeluar;
             const code = klasifikasiCode || (type === 'masuk' ? 'SM' : 'SK');
             
-            const dateObj = tanggalSurat ? new Date(tanggalSurat) : new Date();
-            const year = dateObj.getFullYear();
-            const month = dateObj.getMonth() + 1;
+            // PERUBAHAN: Parsing tanggal lebih aman menggunakan split untuk menghindari bug timezone
+            let year = new Date().getFullYear();
+            let month = new Date().getMonth() + 1;
+            
+            if (tanggalSurat) {
+                const parts = tanggalSurat.split('-');
+                if (parts.length === 3) {
+                    year = parseInt(parts[0]);
+                    month = parseInt(parts[1]);
+                }
+            }
 
             let maxSeqNum = 0;
             data.forEach(item => {
-                if (item.klasifikasi === code && new Date(item.tanggalSurat).getFullYear() === year) {
+                // Ambil tahun dan bulan dari surat yang sudah ada
+                const itemParts = item.tanggalSurat ? item.tanggalSurat.split('-') : [];
+                const itemYear = itemParts.length === 3 ? parseInt(itemParts[0]) : 0;
+                const itemMonth = itemParts.length === 3 ? parseInt(itemParts[1]) : 0;
+                
+                // PERUBAHAN: Cek kesesuaian Klasifikasi + Tahun + Bulan agar nomor urut reset per bulan
+                if (item.klasifikasi === code && itemYear === year && itemMonth === month) {
                     if (item.seqNum && item.seqNum > maxSeqNum) maxSeqNum = item.seqNum;
                 }
             });
+            
             const nextSeqNum = maxSeqNum + 1;
 
             let formatted = template
@@ -313,18 +324,16 @@ function setupSheets() {
 
         function capitalizeFirst(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
 
-        // --- LOCAL STORAGE ---
         function saveLocalData(type) { localStorage.setItem(`${APP_KEY}-${type}`, JSON.stringify(type === 'masuk' ? state.suratMasuk : state.suratKeluar)); }
         function saveKlasifikasi() { localStorage.setItem(`${APP_KEY}-klasifikasi`, JSON.stringify(state.klasifikasi)); }
         function saveFormats() {
-            state.formatMasuk = document.getElementById('inputFormatMasuk').value.trim() || '{no}/{kode}/{tahun}';
-            state.formatKeluar = document.getElementById('inputFormatKeluar').value.trim() || '{no}/{kode}/{tahun}';
+            state.formatMasuk = document.getElementById('inputFormatMasuk').value.trim() || '{no}/{kode}/{romawi}/{tahun}';
+            state.formatKeluar = document.getElementById('inputFormatKeluar').value.trim() || '{no}/{kode}/{romawi}/{tahun}';
             localStorage.setItem(`${APP_KEY}-fmt-masuk`, state.formatMasuk);
             localStorage.setItem(`${APP_KEY}-fmt-keluar`, state.formatKeluar);
             showToast('Format penomoran berhasil disimpan', 'success');
         }
 
-        // --- API ---
         async function apiGet(action) { if (!state.appsScriptUrl) return null; try { const res = await fetch(`${state.appsScriptUrl}?action=${action}`); return await res.json(); } catch (err) { return null; } }
         async function apiPost(data) { if (!state.appsScriptUrl) return null; try { const res = await fetch(state.appsScriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) }); return await res.json(); } catch (err) { return null; } }
         async function fetchSpreadsheetData() {
@@ -335,7 +344,6 @@ function setupSheets() {
             if (resKeluar && resKeluar.success) { state.suratKeluar = resKeluar.data.map(row => ({ id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', tujuan: row['Tujuan'] || '', perihal: row['Perihal'] || '', klasifikasi: row['Klasifikasi'] || '', keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || '', seqNum: 0 })); saveLocalData('keluar'); }
         }
 
-        // --- RENDER DASHBOARD ---
         function renderDashboard() {
             animateCounter('statMasuk', state.suratMasuk.length); animateCounter('statKeluar', state.suratKeluar.length);
             let bulanIni = 0, totalPDF = 0; const now = new Date();
@@ -357,7 +365,6 @@ function setupSheets() {
             renderList(state.suratKeluar, 'recentKeluar', 'keluar');
         }
 
-        // --- RENDER TABEL ---
         function renderMasukTable() {
             const search = (document.getElementById('searchMasuk')?.value || '').toLowerCase();
             const filterBulan = document.getElementById('filterBulanMasuk')?.value || '';
@@ -384,7 +391,6 @@ function setupSheets() {
             }
         }
 
-        // --- MODAL & FORM ---
         function openModal(type) {
             state.modalType = type; state.selectedFile = null; state.selectedFileBase64 = null;
             document.getElementById('modalTitle').textContent = type === 'masuk' ? 'Tambah Surat Masuk' : 'Tambah Surat Keluar';
@@ -440,7 +446,6 @@ function setupSheets() {
         function closeConfirm() { document.getElementById('confirmDialog').classList.add('hidden'); state.deleteTarget = null; }
         function executeDelete() { if (!state.deleteTarget) return; const { type, index } = state.deleteTarget; if (type === 'masuk') { state.suratMasuk.splice(index, 1); saveLocalData('masuk'); } else { state.suratKeluar.splice(index, 1); saveLocalData('keluar'); } closeConfirm(); showToast('Surat berhasil dihapus', 'success'); if (state.currentView === 'dashboard') renderDashboard(); else if (state.currentView === 'masuk') renderMasukTable(); else renderKeluarTable(); }
 
-        // --- PENGATURAN ---
         function initPengaturan() {
             document.getElementById('inputAppsScriptUrl').value = state.appsScriptUrl;
             document.getElementById('inputFormatMasuk').value = state.formatMasuk;
@@ -452,8 +457,9 @@ function setupSheets() {
 
         function updatePreview(type) {
             const inputVal = document.getElementById(`inputFormat${capitalizeFirst(type)}`).value;
-            const template = inputVal || '{no}/{kode}/{tahun}';
-            const preview = template.replace(/{no}/g, '001').replace(/{kode}/g, type === 'masuk' ? 'SM' : 'SK').replace(/{tahun}/g, new Date().getFullYear()).replace(/{bulan}/g, '01').replace(/{romawi}/g, 'I');
+            const template = inputVal || '{no}/{kode}/{romawi}/{tahun}';
+            const now = new Date();
+            const preview = template.replace(/{no}/g, '001').replace(/{kode}/g, type === 'masuk' ? 'SM' : 'SK').replace(/{tahun}/g, now.getFullYear()).replace(/{bulan}/g, String(now.getMonth() + 1).padStart(2, '0')).replace(/{romawi}/g, getRomawi(now.getMonth() + 1));
             document.getElementById(`preview${capitalizeFirst(type)}`).textContent = preview;
         }
 
@@ -461,11 +467,10 @@ function setupSheets() {
         async function testConnection() { if (!state.appsScriptUrl) { showToast('Masukkan URL', 'error'); return; } const sEl = document.getElementById('connectionStatus'), iEl = document.getElementById('connIcon'), tEl = document.getElementById('connText'); sEl.classList.remove('hidden'); iEl.className = 'fas fa-spinner fa-spin'; tEl.textContent = 'Menguji...'; try { const res = await apiGet('ping'); if (res && res.success) { iEl.className = 'fas fa-check-circle'; iEl.style.color = 'var(--success)'; tEl.textContent = 'Berhasil!'; tEl.style.color = 'var(--success)'; } else throw new Error(); } catch { iEl.className = 'fas fa-times-circle'; iEl.style.color = 'var(--danger)'; tEl.textContent = 'Gagal.'; tEl.style.color = 'var(--danger)'; } }
         function copyScript() { navigator.clipboard.writeText(APPS_SCRIPT_CODE).then(() => showToast('Kode disalin', 'success')); }
 
-        // Perubahan: Validasi panjang kode dihapus, spasi otomatis dihilangkan
         function addClassification() { 
             const kw = document.getElementById('inputKeyword').value.trim().toLowerCase(); 
             let cd = document.getElementById('inputCode').value.trim().toUpperCase();
-            cd = cd.replace(/\s+/g, ''); // Hilangkan spasi dalam kode
+            cd = cd.replace(/\s+/g, ''); 
             if (!kw || !cd) { showToast('Isi kata kunci dan kode', 'error'); return; }
             state.klasifikasi.push({ keyword: kw, code: cd }); 
             saveKlasifikasi(); 
@@ -476,7 +481,6 @@ function setupSheets() {
         function removeClassification(index) { state.klasifikasi.splice(index, 1); saveKlasifikasi(); renderKlasifikasiTable(); }
         function renderKlasifikasiTable() { const tbody = document.getElementById('tbodyKlasifikasi'); tbody.innerHTML = state.klasifikasi.map((k, i) => `<tr class="border-t" style="border-color: var(--border);"><td class="px-4 py-2 text-sm font-medium">${capitalizeFirst(k.keyword)}</td><td class="px-4 py-2"><span class="font-mono text-xs font-semibold px-2 py-0.5 rounded" style="background: rgba(22,105,122,0.1); color: var(--primary);">${k.code}</span></td><td class="px-4 py-2 text-right"><button onclick="removeClassification(${i})" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color: var(--danger);"><i class="fas fa-times"></i></button></td></tr>`).join(''); }
 
-        // --- UTILITAS ---
         function escHtml(str) { if (!str) return ''; const div = document.createElement('div'); div.textContent = str; return div.innerHTML; }
         function formatDate(dateStr) { if (!dateStr) return '-'; try { const d = new Date(dateStr); if (isNaN(d.getTime())) return dateStr; const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']; return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`; } catch { return dateStr; } }
         function formatFileSize(bytes) { if (bytes < 1024) return bytes + ' B'; if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB'; return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
@@ -484,7 +488,6 @@ function setupSheets() {
 
         function showToast(message, type = 'info') { const container = document.getElementById('toastContainer'); const toast = document.createElement('div'); const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' }; const colors = { success: 'var(--success)', error: 'var(--danger)', info: 'var(--primary)' }; toast.className = 'toast-item flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border'; toast.style.cssText = `background: white; border-color: var(--border); min-width: 280px;`; toast.innerHTML = `<i class="fas ${icons[type]}" style="color: ${colors[type]};"></i><span class="text-sm flex-1">${escHtml(message)}</span><button onclick="this.parentElement.remove()" class="flex-shrink-0"><i class="fas fa-times text-xs" style="color: var(--text-muted);"></i></button>`; container.appendChild(toast); setTimeout(() => { if (toast.parentElement) toast.remove(); }, 4000); }
 
-        // --- INIT ---
         async function init() { renderDashboard(); if (state.appsScriptUrl) { await fetchSpreadsheetData(); renderDashboard(); } }
         document.addEventListener('DOMContentLoaded', init);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!document.getElementById('confirmDialog').classList.contains('hidden')) closeConfirm(); else if (!document.getElementById('modal').classList.contains('hidden')) closeModal(); } });
