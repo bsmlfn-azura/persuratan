@@ -49,7 +49,7 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--accent);"><i class="fas fa-archive text-white text-lg"></i></div>
-                    <div><h1 class="text-xl text-white leading-tight">E-Arsip</h1><p class="text-xs text-teal-200 -mt-0.5">Digitalisasi Persurata KORPRI</p></div>
+                    <div><h1 class="text-xl text-white leading-tight">E-Arsip</h1><p class="text-xs text-teal-200 -mt-0.5">Digitalisasi Persuratan KORPRI</p></div>
                 </div>
                 <nav class="flex items-center gap-1 sm:gap-2">
                     <button onclick="switchView('dashboard')" class="tab-btn active text-white/80 px-3 py-2 text-sm rounded-lg hover:bg-white/10" data-tab="dashboard"><i class="fas fa-chart-pie mr-1 hidden sm:inline"></i>Dashboard</button>
@@ -182,11 +182,12 @@
 
     <script>
         const APP_KEY = 'e-arsip';
+        const DATA_VERSION = 'v3'; // Versi struktur data untuk migrasi otomatis
+
         let state = {
             suratMasuk: JSON.parse(localStorage.getItem(`${APP_KEY}-masuk`) || '[]'),
             suratKeluar: JSON.parse(localStorage.getItem(`${APP_KEY}-keluar`) || '[]'),
             appsScriptUrl: localStorage.getItem(`${APP_KEY}-url`) || '',
-            // PERUBAHAN: Default format langsung menggunakan bulan romawi
             formatMasuk: localStorage.getItem(`${APP_KEY}-fmt-masuk`) || '{no}/{kode}/{romawi}/{tahun}',
             formatKeluar: localStorage.getItem(`${APP_KEY}-fmt-keluar`) || '{no}/{kode}/{romawi}/{tahun}',
             klasifikasi: JSON.parse(localStorage.getItem(`${APP_KEY}-klasifikasi`) || JSON.stringify([
@@ -194,6 +195,59 @@
             ])),
             currentView: 'dashboard', modalType: null, selectedFile: null, selectedFileBase64: null, deleteTarget: null
         };
+
+        // ==========================================
+        // MIGRASI: Perbaiki data lama yang bermasalah
+        // ==========================================
+        function migrateData() {
+            const savedVersion = localStorage.getItem(`${APP_KEY}-version`);
+            if (savedVersion === DATA_VERSION) return;
+
+            // 1. Perbaiki format template: tambahkan {romawi} jika belum ada
+            const fmtM = localStorage.getItem(`${APP_KEY}-fmt-masuk`);
+            const fmtK = localStorage.getItem(`${APP_KEY}-fmt-keluar`);
+            
+            if (fmtM && !fmtM.includes('{romawi}') && !fmtM.includes('{bulan}')) {
+                const newFmt = fmtM.replace('{tahun}', '{romawi}/{tahun}');
+                localStorage.setItem(`${APP_KEY}-fmt-masuk`, newFmt);
+                state.formatMasuk = newFmt;
+            }
+            if (fmtK && !fmtK.includes('{romawi}') && !fmtK.includes('{bulan}')) {
+                const newFmt = fmtK.replace('{tahun}', '{romawi}/{tahun}');
+                localStorage.setItem(`${APP_KEY}-fmt-keluar`, newFmt);
+                state.formatKeluar = newFmt;
+            }
+
+            // 2. Perbaiki klasifikasi kosong pada data surat lama
+            ['masuk', 'keluar'].forEach(type => {
+                const data = type === 'masuk' ? state.suratMasuk : state.suratKeluar;
+                const defaultCode = type === 'masuk' ? 'SM' : 'SK';
+                let needsSave = false;
+                
+                data.forEach(item => {
+                    if (!item.klasifikasi || item.klasifikasi === '') {
+                        item.klasifikasi = defaultCode;
+                        needsSave = true;
+                    }
+                    // Tambahkan seqNum jika tidak ada (fallback dari nomor surat)
+                    if (!item.seqNum && item.nomorSurat) {
+                        const match = item.nomorSurat.match(/^(\d+)/);
+                        if (match) {
+                            item.seqNum = parseInt(match[1]);
+                            needsSave = true;
+                        }
+                    }
+                });
+                
+                if (needsSave) {
+                    if (type === 'masuk') state.suratMasuk = data;
+                    else state.suratKeluar = data;
+                    saveLocalData(type);
+                }
+            });
+
+            localStorage.setItem(`${APP_KEY}-version`, DATA_VERSION);
+        }
 
         const APPS_SCRIPT_CODE = `// Ganti dengan ID folder Google Drive untuk menyimpan PDF
 var DRIVE_FOLDER_ID = 'GANTI_DENGAN_FOLDER_ID';
@@ -215,7 +269,6 @@ function doPost(e) {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var pdfLink = '';
     if (data.pdfBase64 && data.pdfBase64.length > 0) pdfLink = uploadPDFToDrive(data.pdfBase64, data.nomorSurat);
-    
     if (data.type === 'masuk') {
       ss.getSheetByName('Surat Masuk').appendRow([new Date(), data.nomorSurat, data.tanggalSurat, data.pengirim, data.perihal, data.klasifikasi, data.keterangan, pdfLink]);
     } else if (data.type === 'keluar') {
@@ -249,7 +302,9 @@ function setupSheets() {
             else if (view === 'pengaturan') initPengaturan();
         }
 
-        // --- LOGIKA PENOMORAN (DENGAN RESET PER BULAN) ---
+        // ==========================================
+        // LOGIKA PENOMORAN (FIXED)
+        // ==========================================
         function getRomawi(month) {
             const m = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
             return m[month - 1] || '';
@@ -258,9 +313,11 @@ function setupSheets() {
         function generateNomorSurat(type, klasifikasiCode, tanggalSurat) {
             const data = type === 'masuk' ? state.suratMasuk : state.suratKeluar;
             const template = type === 'masuk' ? state.formatMasuk : state.formatKeluar;
-            const code = klasifikasiCode || (type === 'masuk' ? 'SM' : 'SK');
+            const defaultCode = type === 'masuk' ? 'SM' : 'SK';
             
-            // PERUBAHAN: Parsing tanggal lebih aman menggunakan split untuk menghindari bug timezone
+            // FIX: Pastikan code tidak pernah kosong
+            const code = klasifikasiCode || defaultCode;
+            
             let year = new Date().getFullYear();
             let month = new Date().getMonth() + 1;
             
@@ -272,27 +329,39 @@ function setupSheets() {
                 }
             }
 
+            // Cari nomor urut tertinggi untuk kombinasi: klasifikasi + tahun + bulan
             let maxSeqNum = 0;
             data.forEach(item => {
-                // Ambil tahun dan bulan dari surat yang sudah ada
                 const itemParts = item.tanggalSurat ? item.tanggalSurat.split('-') : [];
                 const itemYear = itemParts.length === 3 ? parseInt(itemParts[0]) : 0;
                 const itemMonth = itemParts.length === 3 ? parseInt(itemParts[1]) : 0;
                 
-                // PERUBAHAN: Cek kesesuaian Klasifikasi + Tahun + Bulan agar nomor urut reset per bulan
-                if (item.klasifikasi === code && itemYear === year && itemMonth === month) {
-                    if (item.seqNum && item.seqNum > maxSeqNum) maxSeqNum = item.seqNum;
+                // FIX: Normalisasi klasifikasi item agar tidak kosong
+                const itemKlasifikasi = item.klasifikasi || defaultCode;
+                
+                if (itemKlasifikasi === code && itemYear === year && itemMonth === month) {
+                    // Cek seqNum, atau fallback ekstrak dari nomor surat
+                    if (item.seqNum && item.seqNum > maxSeqNum) {
+                        maxSeqNum = item.seqNum;
+                    } else if (item.nomorSurat) {
+                        const match = item.nomorSurat.match(/^(\d+)/);
+                        if (match) {
+                            const num = parseInt(match[1]);
+                            if (num > maxSeqNum) maxSeqNum = num;
+                        }
+                    }
                 }
             });
             
             const nextSeqNum = maxSeqNum + 1;
 
+            // FIX: Gunakan replaceAll (teks literal) bukan regex replace
             let formatted = template
-                .replace(/{no}/g, String(nextSeqNum).padStart(3, '0'))
-                .replace(/{kode}/g, code)
-                .replace(/{tahun}/g, year)
-                .replace(/{bulan}/g, String(month).padStart(2, '0'))
-                .replace(/{romawi}/g, getRomawi(month));
+                .replaceAll('{no}', String(nextSeqNum).padStart(3, '0'))
+                .replaceAll('{kode}', code)
+                .replaceAll('{tahun}', String(year))
+                .replaceAll('{bulan}', String(month).padStart(2, '0'))
+                .replaceAll('{romawi}', getRomawi(month));
 
             return { formatted, seqNum: nextSeqNum };
         }
@@ -302,7 +371,7 @@ function setupSheets() {
             const select = document.getElementById('fKlasifikasi');
             let matchedCode = '';
             for (const k of state.klasifikasi) { if (perihal.includes(k.keyword.toLowerCase())) { matchedCode = k.code; break; } }
-            select.value = matchedCode || '';
+            select.value = matchedCode; // Kosongkan jika tidak cocok, biar default yang dipakai
             updateNomorSurat();
         }
 
@@ -338,10 +407,25 @@ function setupSheets() {
         async function apiPost(data) { if (!state.appsScriptUrl) return null; try { const res = await fetch(state.appsScriptUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) }); return await res.json(); } catch (err) { return null; } }
         async function fetchSpreadsheetData() {
             if (!state.appsScriptUrl) return;
+            const defaultMasuk = 'SM', defaultKeluar = 'SK';
             const resMasuk = await apiGet('getMasuk');
-            if (resMasuk && resMasuk.success) { state.suratMasuk = resMasuk.data.map(row => ({ id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', pengirim: row['Pengirim'] || '', perihal: row['Perihal'] || '', klasifikasi: row['Klasifikasi'] || '', keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || '', seqNum: 0 })); saveLocalData('masuk'); }
+            if (resMasuk && resMasuk.success) { 
+                state.suratMasuk = resMasuk.data.map(row => ({ 
+                    id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', 
+                    pengirim: row['Pengirim'] || '', perihal: row['Perihal'] || '', 
+                    klasifikasi: row['Klasifikasi'] || defaultMasuk, // FIX: tidak kosong
+                    keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || '', seqNum: 0 
+                })); saveLocalData('masuk'); 
+            }
             const resKeluar = await apiGet('getKeluar');
-            if (resKeluar && resKeluar.success) { state.suratKeluar = resKeluar.data.map(row => ({ id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', tujuan: row['Tujuan'] || '', perihal: row['Perihal'] || '', klasifikasi: row['Klasifikasi'] || '', keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || '', seqNum: 0 })); saveLocalData('keluar'); }
+            if (resKeluar && resKeluar.success) { 
+                state.suratKeluar = resKeluar.data.map(row => ({ 
+                    id: row.Timestamp || Date.now(), nomorSurat: row['Nomor Surat'] || '', tanggalSurat: row['Tanggal Surat'] || '', 
+                    tujuan: row['Tujuan'] || '', perihal: row['Perihal'] || '', 
+                    klasifikasi: row['Klasifikasi'] || defaultKeluar, // FIX: tidak kosong
+                    keterangan: row['Keterangan'] || '', pdfLink: row['Link PDF'] || '', seqNum: 0 
+                })); saveLocalData('keluar'); 
+            }
         }
 
         function renderDashboard() {
@@ -420,18 +504,23 @@ function setupSheets() {
                 const perihal = document.getElementById('fPerihal').value;
                 const keterangan = document.getElementById('fKeterangan').value;
                 const klasifikasiCode = document.getElementById('fKlasifikasi').value;
+                const defaultCode = type === 'masuk' ? 'SM' : 'SK';
+                
+                // FIX: Pastikan klasifikasi yang disimpan tidak kosong
+                const effectiveKlasifikasi = klasifikasiCode || defaultCode;
+                
                 const nomorResult = generateNomorSurat(type, klasifikasiCode, tanggalSurat);
 
                 if (type === 'masuk') {
                     const pengirim = document.getElementById('fPengirim').value;
                     if (!pengirim || !perihal) { showToast('Lengkapi field wajib', 'error'); throw new Error('Field kosong'); }
-                    const entry = { id: Date.now(), nomorSurat: nomorResult.formatted, seqNum: nomorResult.seqNum, tanggalSurat, pengirim, perihal, klasifikasi: klasifikasiCode, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
+                    const entry = { id: Date.now(), nomorSurat: nomorResult.formatted, seqNum: nomorResult.seqNum, tanggalSurat, pengirim, perihal, klasifikasi: effectiveKlasifikasi, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
                     if (state.appsScriptUrl) { const res = await apiPost({ type: 'masuk', ...entry, pdfBase64: state.selectedFileBase64 || '' }); if (res && res.success) { showToast('Disimpan ke Spreadsheet', 'success'); await fetchSpreadsheetData(); } else throw new Error('Gagal simpan'); }
                     else { state.suratMasuk.push(entry); saveLocalData('masuk'); showToast('Disimpan secara lokal', 'success'); }
                 } else {
                     const tujuan = document.getElementById('fTujuan').value;
                     if (!tujuan || !perihal) { showToast('Lengkapi field wajib', 'error'); throw new Error('Field kosong'); }
-                    const entry = { id: Date.now(), nomorSurat: nomorResult.formatted, seqNum: nomorResult.seqNum, tanggalSurat, tujuan, perihal, klasifikasi: klasifikasiCode, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
+                    const entry = { id: Date.now(), nomorSurat: nomorResult.formatted, seqNum: nomorResult.seqNum, tanggalSurat, tujuan, perihal, klasifikasi: effectiveKlasifikasi, keterangan, fileName: state.selectedFile ? state.selectedFile.name : '', pdfLink: '' };
                     if (state.appsScriptUrl) { const res = await apiPost({ type: 'keluar', ...entry, pdfBase64: state.selectedFileBase64 || '' }); if (res && res.success) { showToast('Disimpan ke Spreadsheet', 'success'); await fetchSpreadsheetData(); } else throw new Error('Gagal simpan'); }
                     else { state.suratKeluar.push(entry); saveLocalData('keluar'); showToast('Disimpan secara lokal', 'success'); }
                 }
@@ -459,7 +548,12 @@ function setupSheets() {
             const inputVal = document.getElementById(`inputFormat${capitalizeFirst(type)}`).value;
             const template = inputVal || '{no}/{kode}/{romawi}/{tahun}';
             const now = new Date();
-            const preview = template.replace(/{no}/g, '001').replace(/{kode}/g, type === 'masuk' ? 'SM' : 'SK').replace(/{tahun}/g, now.getFullYear()).replace(/{bulan}/g, String(now.getMonth() + 1).padStart(2, '0')).replace(/{romawi}/g, getRomawi(now.getMonth() + 1));
+            const preview = template
+                .replaceAll('{no}', '001')
+                .replaceAll('{kode}', type === 'masuk' ? 'SM' : 'SK')
+                .replaceAll('{tahun}', String(now.getFullYear()))
+                .replaceAll('{bulan}', String(now.getMonth() + 1).padStart(2, '0'))
+                .replaceAll('{romawi}', getRomawi(now.getMonth() + 1));
             document.getElementById(`preview${capitalizeFirst(type)}`).textContent = preview;
         }
 
@@ -488,7 +582,11 @@ function setupSheets() {
 
         function showToast(message, type = 'info') { const container = document.getElementById('toastContainer'); const toast = document.createElement('div'); const icons = { success: 'fa-check-circle', error: 'fa-exclamation-circle', info: 'fa-info-circle' }; const colors = { success: 'var(--success)', error: 'var(--danger)', info: 'var(--primary)' }; toast.className = 'toast-item flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg border'; toast.style.cssText = `background: white; border-color: var(--border); min-width: 280px;`; toast.innerHTML = `<i class="fas ${icons[type]}" style="color: ${colors[type]};"></i><span class="text-sm flex-1">${escHtml(message)}</span><button onclick="this.parentElement.remove()" class="flex-shrink-0"><i class="fas fa-times text-xs" style="color: var(--text-muted);"></i></button>`; container.appendChild(toast); setTimeout(() => { if (toast.parentElement) toast.remove(); }, 4000); }
 
-        async function init() { renderDashboard(); if (state.appsScriptUrl) { await fetchSpreadsheetData(); renderDashboard(); } }
+        async function init() { 
+            migrateData(); // Jalankan migrasi otomatis
+            renderDashboard(); 
+            if (state.appsScriptUrl) { await fetchSpreadsheetData(); renderDashboard(); } 
+        }
         document.addEventListener('DOMContentLoaded', init);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (!document.getElementById('confirmDialog').classList.contains('hidden')) closeConfirm(); else if (!document.getElementById('modal').classList.contains('hidden')) closeModal(); } });
     </script>
