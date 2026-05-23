@@ -9,21 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --primary: #16697A;
-            --primary-dark: #0E4A56;
-            --primary-light: #1E8A9E;
-            --accent: #D4983D;
-            --accent-light: #F0D89A;
-            --bg: #F5F1EB;
-            --card: #FFFFFF;
-            --text: #1C1C28;
-            --text-muted: #6B6B7B;
-            --border: #E0D8CE;
-            --masuk: #16697A;
-            --keluar: #B8722D;
-            --success: #2D8F4E;
-            --danger: #C44536;
-            --warning: #D4983D;
+            --primary: #16697A; --primary-dark: #0E4A56; --primary-light: #1E8A9E;
+            --accent: #D4983D; --accent-light: #F0D89A; --bg: #F5F1EB; --card: #FFFFFF;
+            --text: #1C1C28; --text-muted: #6B6B7B; --border: #E0D8CE;
+            --masuk: #16697A; --keluar: #B8722D; --success: #2D8F4E; --danger: #C44536; --warning: #D4983D;
         }
         * { box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; min-height: 100vh; }
@@ -120,10 +109,11 @@
                 <div class="lg:col-span-3 animate-fade-in-up stagger-2">
                     <div class="bg-white rounded-xl shadow-sm border p-6">
                         <h3 class="text-lg font-bold mb-2" style="color: var(--primary);"><i class="fas fa-tags mr-2"></i>Klasifikasi Penomoran</h3>
-                        <p class="text-sm mb-4" style="color: var(--text-muted);">Deteksi otomatis dari perihal surat.</p>
+                        <p class="text-sm mb-4" style="color: var(--text-muted);">Deteksi otomatis dari perihal surat. Kode klasifikasi tidak dibatasi jumlah karakternya.</p>
                         <div class="flex gap-2 mb-4">
                             <input type="text" id="inputKeyword" placeholder="Kata kunci (misal: Undangan)" class="form-input flex-1 px-3 py-2 rounded-lg border text-sm" style="border-color: var(--border);">
-                            <input type="text" id="inputCode" placeholder="Kode (misal: UND)" maxlength="5" class="form-input w-24 px-3 py-2 rounded-lg border text-sm uppercase text-center font-semibold" style="border-color: var(--border);">
+                            <!-- Perubahan: maxlength dihapus, width diperbesar menjadi w-40 -->
+                            <input type="text" id="inputCode" placeholder="Kode (misal: UND)" class="form-input w-40 px-3 py-2 rounded-lg border text-sm uppercase text-center font-semibold" style="border-color: var(--border);">
                             <button onclick="addClassification()" class="btn-primary px-4 py-2 rounded-lg text-sm font-semibold"><i class="fas fa-plus"></i></button>
                         </div>
                         <div class="overflow-x-auto max-h-48 overflow-y-auto"><table class="w-full text-sm"><thead><tr style="background: rgba(22,105,122,0.04);"><th class="text-left px-4 py-2 font-medium">Kata Kunci</th><th class="text-left px-4 py-2 font-medium">Kode</th><th class="px-4 py-2"></th></tr></thead><tbody id="tbodyKlasifikasi"></tbody></table></div>
@@ -140,34 +130,26 @@
                     <div>
                         <label class="block text-sm font-semibold mb-2" style="color: var(--masuk);">Surat Masuk</label>
                         <input type="text" id="inputFormatMasuk" oninput="updatePreview('masuk')" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm font-mono" style="border-color: var(--border);">
-                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(22,105,122,0.05);">
-                            <span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span>
-                            <span id="previewMasuk" class="font-mono font-semibold" style="color: var(--masuk);">001/SM/2024</span>
-                        </div>
+                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(22,105,122,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewMasuk" class="font-mono font-semibold" style="color: var(--masuk);">001/SM/2024</span></div>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold mb-2" style="color: var(--keluar);">Surat Keluar</label>
                         <input type="text" id="inputFormatKeluar" oninput="updatePreview('keluar')" class="form-input w-full px-4 py-2.5 rounded-lg border text-sm font-mono" style="border-color: var(--border);">
-                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(184,114,45,0.05);">
-                            <span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span>
-                            <span id="previewKeluar" class="font-mono font-semibold" style="color: var(--keluar);">001/SK/2024</span>
-                        </div>
+                        <div class="mt-2 p-3 rounded-lg text-sm" style="background: rgba(184,114,45,0.05);"><span class="text-xs font-medium block mb-1" style="color: var(--text-muted);">Preview:</span><span id="previewKeluar" class="font-mono font-semibold" style="color: var(--keluar);">001/SK/2024</span></div>
                     </div>
                 </div>
 
                 <div class="mt-4 p-4 rounded-lg border border-dashed" style="border-color: var(--border); background: rgba(255,255,255,0.5);">
                     <h4 class="text-sm font-semibold mb-2">Variabel yang Tersedia:</h4>
                     <div class="flex flex-wrap gap-2 text-xs">
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{no}</code><span class="self-center">Nomor urut (001, 002...)</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{kode}</code><span class="self-center">Kode klasifikasi (SM, UND, SPPD)</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{tahun}</code><span class="self-center">Tahun 4 digit (2024)</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{bulan}</code><span class="self-center">Bulan 2 digit (01, 12)</span>
-                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{romawi}</code><span class="self-center">Bulan Romawi (I, XII)</span>
+                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{no}</code><span class="self-center">Nomor urut</span>
+                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{kode}</code><span class="self-center">Kode klasifikasi</span>
+                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{tahun}</code><span class="self-center">Tahun 4 digit</span>
+                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{bulan}</code><span class="self-center">Bulan 2 digit</span>
+                        <code class="px-2 py-1 rounded font-bold" style="background: #eee; color: var(--text);">{romawi}</code><span class="self-center">Bulan Romawi</span>
                     </div>
                 </div>
-                <div class="mt-4 text-right">
-                    <button onclick="saveFormats()" class="btn-primary px-5 py-2.5 rounded-lg font-semibold text-sm"><i class="fas fa-save mr-1"></i> Simpan Format</button>
-                </div>
+                <div class="mt-4 text-right"><button onclick="saveFormats()" class="btn-primary px-5 py-2.5 rounded-lg font-semibold text-sm"><i class="fas fa-save mr-1"></i> Simpan Format</button></div>
             </div>
 
             <!-- Panduan Script -->
@@ -286,7 +268,6 @@ function setupSheets() {
             const year = dateObj.getFullYear();
             const month = dateObj.getMonth() + 1;
 
-            // Cari nomor urut tertinggi berdasarkan seqNum yang disimpan
             let maxSeqNum = 0;
             data.forEach(item => {
                 if (item.klasifikasi === code && new Date(item.tanggalSurat).getFullYear() === year) {
@@ -295,7 +276,6 @@ function setupSheets() {
             });
             const nextSeqNum = maxSeqNum + 1;
 
-            // Replace template
             let formatted = template
                 .replace(/{no}/g, String(nextSeqNum).padStart(3, '0'))
                 .replace(/{kode}/g, code)
@@ -481,7 +461,18 @@ function setupSheets() {
         async function testConnection() { if (!state.appsScriptUrl) { showToast('Masukkan URL', 'error'); return; } const sEl = document.getElementById('connectionStatus'), iEl = document.getElementById('connIcon'), tEl = document.getElementById('connText'); sEl.classList.remove('hidden'); iEl.className = 'fas fa-spinner fa-spin'; tEl.textContent = 'Menguji...'; try { const res = await apiGet('ping'); if (res && res.success) { iEl.className = 'fas fa-check-circle'; iEl.style.color = 'var(--success)'; tEl.textContent = 'Berhasil!'; tEl.style.color = 'var(--success)'; } else throw new Error(); } catch { iEl.className = 'fas fa-times-circle'; iEl.style.color = 'var(--danger)'; tEl.textContent = 'Gagal.'; tEl.style.color = 'var(--danger)'; } }
         function copyScript() { navigator.clipboard.writeText(APPS_SCRIPT_CODE).then(() => showToast('Kode disalin', 'success')); }
 
-        function addClassification() { const kw = document.getElementById('inputKeyword').value.trim().toLowerCase(); const cd = document.getElementById('inputCode').value.trim().toUpperCase(); if (!kw || !cd) { showToast('Isi kata kunci dan kode', 'error'); return; } state.klasifikasi.push({ keyword: kw, code: cd }); saveKlasifikasi(); document.getElementById('inputKeyword').value = ''; document.getElementById('inputCode').value = ''; renderKlasifikasiTable(); }
+        // Perubahan: Validasi panjang kode dihapus, spasi otomatis dihilangkan
+        function addClassification() { 
+            const kw = document.getElementById('inputKeyword').value.trim().toLowerCase(); 
+            let cd = document.getElementById('inputCode').value.trim().toUpperCase();
+            cd = cd.replace(/\s+/g, ''); // Hilangkan spasi dalam kode
+            if (!kw || !cd) { showToast('Isi kata kunci dan kode', 'error'); return; }
+            state.klasifikasi.push({ keyword: kw, code: cd }); 
+            saveKlasifikasi(); 
+            document.getElementById('inputKeyword').value = ''; 
+            document.getElementById('inputCode').value = ''; 
+            renderKlasifikasiTable(); 
+        }
         function removeClassification(index) { state.klasifikasi.splice(index, 1); saveKlasifikasi(); renderKlasifikasiTable(); }
         function renderKlasifikasiTable() { const tbody = document.getElementById('tbodyKlasifikasi'); tbody.innerHTML = state.klasifikasi.map((k, i) => `<tr class="border-t" style="border-color: var(--border);"><td class="px-4 py-2 text-sm font-medium">${capitalizeFirst(k.keyword)}</td><td class="px-4 py-2"><span class="font-mono text-xs font-semibold px-2 py-0.5 rounded" style="background: rgba(22,105,122,0.1); color: var(--primary);">${k.code}</span></td><td class="px-4 py-2 text-right"><button onclick="removeClassification(${i})" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color: var(--danger);"><i class="fas fa-times"></i></button></td></tr>`).join(''); }
 
