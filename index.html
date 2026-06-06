@@ -32,6 +32,20 @@
         .co{backdrop-filter:blur(4px);background:rgba(0,0,0,.5)}
         @media print{header,.np{display:none!important}}
         .dbg{background:#f0fdf4;border:1px solid #bbf7d0;font-size:11px;font-family:monospace;padding:8px 12px;border-radius:8px;margin-top:4px}
+        
+        /* STICKY MODAL LAYOUT */
+        .modal-wrapper {
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh; /* Batas tinggi maksimal 90% layar */
+            margin: 5vh auto;
+            overflow: hidden; /* Penting: cegah container membesar */
+        }
+        .modal-body {
+            flex: 1 1 0%; /* Biarkan body mengisi sisa ruang */
+            overflow-y: auto; /* Aktifkan scroll di sini */
+            min-height: 0; /* Solusi krusial untuk flexbox scroll */
+        }
     </style>
 </head>
 <body>
@@ -71,7 +85,7 @@
         <div id="viewKeluar" class="view hidden">
             <div class="flex items-center justify-between mb-6 flex-wrap gap-3 au"><h2 class="text-2xl sm:text-3xl font-bold" style="color:var(--pd)">Surat Keluar</h2><button onclick="om('keluar')" class="ba px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 np"><i class="fas fa-plus"></i> Tambah</button></div>
             <div class="bg-white rounded-xl shadow-sm border p-4 mb-4 np au"><div class="flex gap-3 flex-wrap"><div class="flex-1 min-w-[200px]"><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="sK2" placeholder="Cari..." oninput="rKT()" class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div></div><input type="month" id="fBK" onchange="rKT()" class="fi2 px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div></div>
-            <div class="bg-white rounded-xl shadow-sm border au"><div class="overflow-x-auto"><table class="dt w-full text-sm"><thead><tr style="background:rgba(184,114,45,.04)"><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">No. Surat</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tgl</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Klasifikasi</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tujuan</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Perihal</th><th class="text-center px-4 py-3 font-semibold np" style="color:var(--pd)">Aksi</th></tr></thead><tbody id="tK"></tbody></table></div><div id="eK" class="text-center py-12 hidden"><i class="fas fa-paper-plane text-5xl mb-3" style="color:var(--bd)"></i><p style="color:var(--tm)">Belum ada数据</p></div></div>
+            <div class="bg-white rounded-xl shadow-sm border au"><div class="overflow-x-auto"><table class="dt w-full text-sm"><thead><tr style="background:rgba(184,114,45,.04)"><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">No. Surat</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tgl</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Klasifikasi</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tujuan</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Perihal</th><th class="text-center px-4 py-3 font-semibold np" style="color:var(--pd)">Aksi</th></tr></thead><tbody id="tK"></tbody></table></div><div id="eK" class="text-center py-12 hidden"><i class="fas fa-paper-plane text-5xl mb-3" style="color:var(--bd)"></i><p style="color:var(--tm)">Belum ada data</p></div></div>
         </div>
         <!-- PENGATURAN -->
         <div id="viewPengaturan" class="view hidden">
@@ -90,10 +104,12 @@
         </div>
     </main>
 
-    <!-- ========== MODAL FIX: STICKY HEADER & FOOTER ========== -->
+    <!-- ========== MODAL FINAL FIX ========== -->
     <div id="modal" class="fixed inset-0 z-50 hidden">
         <div class="mo absolute inset-0" onclick="cm()"></div>
-        <form id="sF" onsubmit="hSub(event)" class="mb relative z-10 w-full max-w-lg mx-auto flex flex-col max-h-[94vh] my-[3vh] bg-white rounded-2xl shadow-2xl">
+        
+        <!-- Container Utama Modal: flex col, max-height 90vh, overflow hidden -->
+        <div class="mb relative z-10 w-full max-w-lg mx-auto modal-wrapper bg-white rounded-2xl shadow-2xl">
             
             <!-- STICKY HEADER -->
             <div class="flex-shrink-0 bg-white rounded-t-2xl border-b px-6 py-4 flex items-center justify-between z-20">
@@ -101,33 +117,36 @@
                 <button type="button" onclick="cm()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100"><i class="fas fa-times" style="color:var(--tm)"></i></button>
             </div>
             
-            <!-- SCROLLABLE BODY -->
-            <div class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
-                <div><label class="block text-sm font-medium mb-1.5">Perihal <span class="text-red-500">*</span></label><input type="text" id="fP" placeholder="Ketik perihal surat..." oninput="hPC()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
-                <div><label class="block text-sm font-medium mb-1.5">Klasifikasi Surat</label><select id="fK" onchange="oKC()" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm font-semibold" style="border-color:var(--bd)"></select></div>
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color:var(--tm)">(otomatis)</span></label>
-                    <div class="relative"><i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="fN" readonly class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color:var(--bd)"></div>
-                    <div id="dbgInfo" class="dbg hidden"></div>
-                </div>
-                <div><label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label><input type="date" id="fD" onchange="uNS()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
-                <div id="fPr"><label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label><input type="text" id="fPr2" placeholder="Instansi/pengirim" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
-                <div id="fTj" class="hidden"><label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label><input type="text" id="fTj2" placeholder="Instansi/tujuan" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
-                <div><label class="block text-sm font-medium mb-1.5">Keterangan</label><textarea id="fKt" rows="2" placeholder="Catatan (opsional)" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color:var(--bd)"></textarea></div>
-                <div>
-                    <label class="block text-sm font-medium mb-1.5">Upload PDF</label>
-                    <div id="uA" class="ua rounded-lg p-5 text-center cursor-pointer" onclick="document.getElementById('fPD').click()"><i class="fas fa-cloud-upload-alt text-2xl mb-2" style="color:var(--tm)"></i><p class="text-sm" style="color:var(--tm)">Klik atau seret PDF</p><input type="file" id="fPD" accept="application/pdf" class="hidden" onchange="if(this.files[0])pFl(this.files[0])"></div>
-                    <div id="fI" class="hidden mt-2 flex items-center gap-2 p-2.5 rounded-lg" style="background:rgba(45,143,78,.06)"><i class="fas fa-file-pdf" style="color:var(--ng)"></i><span id="fNm" class="text-sm flex-1 truncate"></span><button type="button" onclick="rFl()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color:var(--ng)"><i class="fas fa-times"></i></button></div>
-                </div>
+            <!-- SCROLLABLE FORM BODY -->
+            <!-- Penting: min-height: 0 agar flexbox tidak memaksa tinggi membesar -->
+            <div class="modal-body px-6 py-5" style="min-height: 0;">
+                <form id="sF" onsubmit="hSub(event)" class="space-y-4">
+                    <div><label class="block text-sm font-medium mb-1.5">Perihal <span class="text-red-500">*</span></label><input type="text" id="fP" placeholder="Ketik perihal surat..." oninput="hPC()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                    <div><label class="block text-sm font-medium mb-1.5">Klasifikasi Surat</label><select id="fK" onchange="oKC()" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm font-semibold" style="border-color:var(--bd)"></select></div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color:var(--tm)">(otomatis)</span></label>
+                        <div class="relative"><i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="fN" readonly class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color:var(--bd)"></div>
+                        <div id="dbgInfo" class="dbg hidden"></div>
+                    </div>
+                    <div><label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label><input type="date" id="fD" onchange="uNS()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                    <div id="fPr"><label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label><input type="text" id="fPr2" placeholder="Instansi/pengirim" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                    <div id="fTj" class="hidden"><label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label><input type="text" id="fTj2" placeholder="Instansi/tujuan" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                    <div><label class="block text-sm font-medium mb-1.5">Keterangan</label><textarea id="fKt" rows="2" placeholder="Catatan (opsional)" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color:var(--bd)"></textarea></div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1.5">Upload PDF</label>
+                        <div id="uA" class="ua rounded-lg p-4 text-center cursor-pointer" onclick="document.getElementById('fPD').click()"><i class="fas fa-cloud-upload-alt text-xl mb-1" style="color:var(--tm)"></i><p class="text-xs" style="color:var(--tm)">Klik atau seret PDF (Maks 5MB)</p><input type="file" id="fPD" accept="application/pdf" class="hidden" onchange="if(this.files[0])pFl(this.files[0])"></div>
+                        <div id="fI" class="hidden mt-2 flex items-center gap-2 p-2 rounded-lg" style="background:rgba(45,143,78,.06)"><i class="fas fa-file-pdf" style="color:var(--ng)"></i><span id="fNm" class="text-xs flex-1 truncate"></span><button type="button" onclick="rFl()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color:var(--ng)"><i class="fas fa-times"></i></button></div>
+                    </div>
+                </form>
             </div>
             
             <!-- STICKY FOOTER -->
-            <div class="flex-shrink-0 bg-white border-t px-6 py-4 flex gap-3 z-20">
+            <div class="flex-shrink-0 bg-white border-t px-6 py-4 flex gap-3 z-20 rounded-b-2xl">
                 <button type="button" onclick="cm()" class="flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color:var(--bd)">Batal</button>
-                <button type="submit" id="bS" class="bp flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"><i class="fas fa-save"></i>Simpan</button>
+                <button type="submit" form="sF" id="bS" class="bp flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"><i class="fas fa-save"></i>Simpan</button>
             </div>
             
-        </form>
+        </div>
     </div>
 
     <div id="cD" class="fixed inset-0 z-[60] hidden"><div class="co absolute inset-0"></div><div class="relative z-10 w-full max-w-sm mx-auto mt-[30vh] bg-white rounded-2xl shadow-2xl p-6 as"><div class="text-center mb-5"><div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background:rgba(196,69,54,.1)"><i class="fas fa-trash-alt text-xl" style="color:var(--ng)"></i></div><h3 class="text-lg font-bold">Hapus Surat?</h3></div><div class="flex gap-3"><button onclick="ccD()" class="flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color:var(--bd)">Batal</button><button id="bCD" class="bd flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm">Hapus</button></div></div></div>
@@ -135,7 +154,7 @@
 
     <script>
     if(!String.prototype.replaceAll){String.prototype.replaceAll=function(s,r){return this.split(s).join(r)}}
-    const AK='e-arsip',AV='v8-sticky-modal';
+    const AK='e-arsip',AV='v9-sticky-modal-fix';
     let S={sM:[],sK:[],au:localStorage.getItem(AK+'-url')||'',fM:localStorage.getItem(AK+'-fmt-m')||'{no}/{kode}/{romawi}/{tahun}',fK:localStorage.getItem(AK+'-fmt-k')||'{no}/{kode}/{romawi}/{tahun}',kl:JSON.parse(localStorage.getItem(AK+'-klas')||JSON.stringify([{keyword:'undangan',code:'UND'},{keyword:'penugasan',code:'TGS'},{keyword:'sppd',code:'SPPD'},{keyword:'izin',code:'IZN'}])),cv:'dashboard',mt:null,sf:null,sfb:false,dt:null,mk:false};
 
     function loadFix(){
