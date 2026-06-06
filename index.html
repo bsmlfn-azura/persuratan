@@ -73,7 +73,7 @@ body::after {
 <body>
     <header class="sticky top-0 z-40 shadow-lg" style="background:linear-gradient(135deg,var(--pd),var(--p))">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--ac)"><i class="fas fa-archive text-white text-lg"></i></div><div><h1 class="text-xl text-white leading-tight">E-Arsip</h1><p class="text-xs text-teal-200 -mt-0.5">Pencatat Surat Masuk & Keluar</p></div></div>
+            <div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:var(--ac)"><i class="fas fa-archive text-white text-lg"></i></div><div><h1 class="text-xl text-white leading-tight">E-Arsip KORPRI</h1><p class="text-xs text-teal-200 -mt-0.5">Pencatat Surat Masuk & Keluar</p></div></div>
             <nav class="flex items-center gap-1 sm:gap-2">
                 <button onclick="sv('dashboard')" class="tb act text-white/80 px-3 py-2 text-sm rounded-lg hover:bg-white/10" data-tab="dashboard"><i class="fas fa-chart-pie mr-1 hidden sm:inline"></i>Dashboard</button>
                 <button onclick="sv('masuk')" class="tb text-white/80 px-3 py-2 text-sm rounded-lg hover:bg-white/10" data-tab="masuk"><i class="fas fa-inbox mr-1 hidden sm:inline"></i>Masuk</button>
@@ -114,10 +114,10 @@ body::after {
             <div class="mb-6 au"><h2 class="text-2xl sm:text-3xl font-bold" style="color:var(--pd)">Pengaturan</h2><p class="text-sm mt-1" style="color:var(--tm)">Versi: <strong id="vL">-</strong></p></div>
             <div class="grid lg:grid-cols-5 gap-6 mb-6">
                 <div class="lg:col-span-2 au">
-                    <!--
+                    
                     <div class="bg-white rounded-xl shadow-sm border p-6"><h3 class="text-lg font-bold mb-4" style="color:var(--p)"><i class="fas fa-link mr-2"></i>Koneksi</h3><div class="mb-4"><input type="url" id="iU" placeholder="URL Google Apps Script..." class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div><div class="flex gap-2"><button onclick="sCfg()" class="bp px-5 py-2.5 rounded-lg font-semibold text-sm flex-1"><i class="fas fa-save mr-1"></i>Simpan</button><button onclick="tCon()" class="px-5 py-2.5 rounded-lg font-semibold text-sm border flex-1 hover:bg-gray-50" style="border-color:var(--bd)"><i class="fas fa-plug mr-1"></i>Tes</button></div><div id="cS" class="mt-4 hidden"><div class="flex items-center gap-2 p-3 rounded-lg text-sm"><i id="cI" class="fas"></i><span id="cT"></span></div></div></div>
                     <div class="bg-white rounded-xl shadow-sm border p-6 mt-4"><h3 class="text-lg font-bold mb-2" style="color:var(--ng)"><i class="fas fa-exclamation-triangle mr-2"></i>Reset Data</h3><p class="text-sm mb-4" style="color:var(--tm)">Hapus semua data lokal jika penomoran bermasalah akibat data korup dari versi lama.</p><button onclick="rAll()" class="bo w-full px-5 py-2.5 rounded-lg font-semibold text-sm"><i class="fas fa-trash-alt mr-1"></i>Reset Semua Data Lokal</button></div>
-                    -->
+                    
                 </div>
                 <div class="lg:col-span-3 au">
                     <div class="bg-white rounded-xl shadow-sm border p-6"><h3 class="text-lg font-bold mb-2" style="color:var(--p)"><i class="fas fa-tags mr-2"></i>Klasifikasi</h3><p class="text-sm mb-4" style="color:var(--tm)">Deteksi otomatis dari perihal surat.</p><div class="flex gap-2 mb-4"><input type="text" id="iK" placeholder="Kata kunci" class="fi2 flex-1 px-3 py-2 rounded-lg border text-sm" style="border-color:var(--bd)"><input type="text" id="iC" placeholder="Kode" class="fi2 w-36 px-3 py-2 rounded-lg border text-sm uppercase text-center font-semibold" style="border-color:var(--bd)"><button onclick="aCls()" class="bp px-4 py-2 rounded-lg text-sm font-semibold"><i class="fas fa-plus"></i></button></div><div class="overflow-x-auto max-h-48 overflow-y-auto"><table class="w-full text-sm"><thead><tr style="background:rgba(22,105,122,.04)"><th class="text-left px-4 py-2 font-medium">Kata Kunci</th><th class="text-left px-4 py-2 font-medium">Kode</th><th class="px-4 py-2"></th></tr></thead><tbody id="tC"></tbody></table></div></div>
