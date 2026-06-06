@@ -177,7 +177,7 @@ body::after {
     <script>
     if(!String.prototype.replaceAll){String.prototype.replaceAll=function(s,r){return this.split(s).join(r)}}
     const AK='e-arsip',AV='v9-sticky-modal-fix';
-    let S={sM:[],sK:[],au:localStorage.getItem(AK+'-url')||'',fM:localStorage.getItem(AK+'-fmt-m')||'{no}/{kode}/{romawi}/{tahun}',fK:localStorage.getItem(AK+'-fmt-k')||'{no}/{kode}/{romawi}/{tahun}',kl:JSON.parse(localStorage.getItem(AK+'-klas')||JSON.stringify([{keyword:'undangan',code:'UND'},{keyword:'penugasan',code:'TGS'},{keyword:'sppd',code:'SPPD'},{keyword:'izin',code:'IZN'}])),cv:'dashboard',mt:null,sf:null,sfb:false,dt:null,mk:false};
+    let S={sM:[],sK:[],au:localStorage.getItem(AK+'-url')||'https://script.google.com/macros/s/AKfycbzIumEoS5qp90QRlc1h9rt-hv1YlMusS3ozTE5n1A3nUD7_d4_fSozVDtTNqArNoH6g/exec',fM:localStorage.getItem(AK+'-fmt-m')||'{no}/{kode}/{romawi}/{tahun}',fK:localStorage.getItem(AK+'-fmt-k')||'{no}/{kode}/{romawi}/{tahun}',kl:JSON.parse(localStorage.getItem(AK+'-klas')||JSON.stringify([{keyword:'undangan',code:'UND'},{keyword:'penugasan',code:'TGS'},{keyword:'sppd',code:'SPPD'},{keyword:'izin',code:'IZN'}])),cv:'dashboard',mt:null,sf:null,sfb:false,dt:null,mk:false};
 
     function loadFix(){
         ['masuk','keluar'].forEach(t=>{
