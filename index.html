@@ -31,7 +31,7 @@
         ::-webkit-scrollbar{width:6px;height:6px}::-webkit-scrollbar-thumb{background:var(--bd);border-radius:3px}
         .co{backdrop-filter:blur(4px);background:rgba(0,0,0,.5)}
         @media print{header,.np{display:none!important}}
-        .dbg{background:#f0fdf4;border:1px solid #bbf7d0;font-size:11px;font-family:monospace;padding:8px 12px;border-radius:8px;margin-top:8px}
+        .dbg{background:#f0fdf4;border:1px solid #bbf7d0;font-size:11px;font-family:monospace;padding:8px 12px;border-radius:8px;margin-top:4px}
     </style>
 </head>
 <body>
@@ -71,7 +71,7 @@
         <div id="viewKeluar" class="view hidden">
             <div class="flex items-center justify-between mb-6 flex-wrap gap-3 au"><h2 class="text-2xl sm:text-3xl font-bold" style="color:var(--pd)">Surat Keluar</h2><button onclick="om('keluar')" class="ba px-5 py-2.5 rounded-xl font-semibold text-sm flex items-center gap-2 np"><i class="fas fa-plus"></i> Tambah</button></div>
             <div class="bg-white rounded-xl shadow-sm border p-4 mb-4 np au"><div class="flex gap-3 flex-wrap"><div class="flex-1 min-w-[200px]"><div class="relative"><i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="sK2" placeholder="Cari..." oninput="rKT()" class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div></div><input type="month" id="fBK" onchange="rKT()" class="fi2 px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div></div>
-            <div class="bg-white rounded-xl shadow-sm border au"><div class="overflow-x-auto"><table class="dt w-full text-sm"><thead><tr style="background:rgba(184,114,45,.04)"><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">No. Surat</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tgl</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Klasifikasi</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tujuan</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Perihal</th><th class="text-center px-4 py-3 font-semibold np" style="color:var(--pd)">Aksi</th></tr></thead><tbody id="tK"></tbody></table></div><div id="eK" class="text-center py-12 hidden"><i class="fas fa-paper-plane text-5xl mb-3" style="color:var(--bd)"></i><p style="color:var(--tm)">Belum ada data</p></div></div>
+            <div class="bg-white rounded-xl shadow-sm border au"><div class="overflow-x-auto"><table class="dt w-full text-sm"><thead><tr style="background:rgba(184,114,45,.04)"><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">No. Surat</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tgl</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Klasifikasi</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Tujuan</th><th class="text-left px-4 py-3 font-semibold" style="color:var(--pd)">Perihal</th><th class="text-center px-4 py-3 font-semibold np" style="color:var(--pd)">Aksi</th></tr></thead><tbody id="tK"></tbody></table></div><div id="eK" class="text-center py-12 hidden"><i class="fas fa-paper-plane text-5xl mb-3" style="color:var(--bd)"></i><p style="color:var(--tm)">Belum ada数据</p></div></div>
         </div>
         <!-- PENGATURAN -->
         <div id="viewPengaturan" class="view hidden">
@@ -89,157 +89,102 @@
             <div class="bg-white rounded-xl shadow-sm border p-6 au"><h3 class="text-lg font-bold mb-4" style="color:var(--p)"><i class="fas fa-book mr-2"></i>Panduan Apps Script</h3><div class="relative"><button onclick="cScr()" class="absolute top-2 right-2 text-xs px-3 py-1 rounded-md font-medium hover:opacity-80 z-10" style="background:var(--p);color:white"><i class="fas fa-copy mr-1"></i>Salin</button><pre id="sCd" class="text-xs p-4 rounded-lg overflow-x-auto max-h-72" style="background:#1C1C28;color:#E0D8CE;line-height:1.6"></pre></div></div>
         </div>
     </main>
-    <!-- MODAL -->
-    <div id="modal" class="fixed inset-0 z-50 hidden"><div class="mo absolute inset-0" onclick="cm()"></div><div class="mb relative z-10 w-full max-w-lg mx-auto mt-[5vh] max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl"><div class="sticky top-0 bg-white rounded-t-2xl border-b px-6 py-4 flex items-center justify-between z-10"><h3 id="mT" class="text-lg font-bold" style="color:var(--pd)">Tambah Surat</h3><button onclick="cm()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100"><i class="fas fa-times" style="color:var(--tm)"></i></button></div><form id="sF" onsubmit="hSub(event)" class="px-6 py-5 space-y-4"><div><label class="block text-sm font-medium mb-1.5">Perihal <span class="text-red-500">*</span></label><input type="text" id="fP" placeholder="Ketik perihal surat..." oninput="hPC()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div><div><label class="block text-sm font-medium mb-1.5">Klasifikasi Surat</label><select id="fK" onchange="oKC()" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm font-semibold" style="border-color:var(--bd)"></select></div><div><label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color:var(--tm)">(otomatis)</span></label><div class="relative"><i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="fN" readonly class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color:var(--bd)"></div><div id="dbgInfo" class="dbg hidden"></div></div><div><label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label><input type="date" id="fD" onchange="uNS()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div><div id="fPr"><label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label><input type="text" id="fPr2" placeholder="Instansi/pengirim" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div><div id="fTj" class="hidden"><label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label><input type="text" id="fTj2" placeholder="Instansi/tujuan" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div><div><label class="block text-sm font-medium mb-1.5">Keterangan</label><textarea id="fKt" rows="2" placeholder="Catatan (opsional)" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color:var(--bd)"></textarea></div><div><label class="block text-sm font-medium mb-1.5">Upload PDF</label><div id="uA" class="ua rounded-lg p-5 text-center cursor-pointer" onclick="document.getElementById('fPD').click()"><i class="fas fa-cloud-upload-alt text-2xl mb-2" style="color:var(--tm)"></i><p class="text-sm" style="color:var(--tm)">Klik atau seret PDF</p><input type="file" id="fPD" accept="application/pdf" class="hidden" onchange="if(this.files[0])pFl(this.files[0])"></div><div id="fI" class="hidden mt-2 flex items-center gap-2 p-2.5 rounded-lg" style="background:rgba(45,143,78,.06)"><i class="fas fa-file-pdf" style="color:var(--ng)"></i><span id="fNm" class="text-sm flex-1 truncate"></span><button type="button" onclick="rFl()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color:var(--ng)"><i class="fas fa-times"></i></button></div></div><div class="flex gap-3 pt-2"><button type="button" onclick="cm()" class="flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color:var(--bd)">Batal</button><button type="submit" id="bS" class="bp flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"><i class="fas fa-save"></i>Simpan</button></div></form></div></div>
+
+    <!-- ========== MODAL FIX: STICKY HEADER & FOOTER ========== -->
+    <div id="modal" class="fixed inset-0 z-50 hidden">
+        <div class="mo absolute inset-0" onclick="cm()"></div>
+        <form id="sF" onsubmit="hSub(event)" class="mb relative z-10 w-full max-w-lg mx-auto flex flex-col max-h-[94vh] my-[3vh] bg-white rounded-2xl shadow-2xl">
+            
+            <!-- STICKY HEADER -->
+            <div class="flex-shrink-0 bg-white rounded-t-2xl border-b px-6 py-4 flex items-center justify-between z-20">
+                <h3 id="mT" class="text-lg font-bold" style="color:var(--pd)">Tambah Surat</h3>
+                <button type="button" onclick="cm()" class="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100"><i class="fas fa-times" style="color:var(--tm)"></i></button>
+            </div>
+            
+            <!-- SCROLLABLE BODY -->
+            <div class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+                <div><label class="block text-sm font-medium mb-1.5">Perihal <span class="text-red-500">*</span></label><input type="text" id="fP" placeholder="Ketik perihal surat..." oninput="hPC()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                <div><label class="block text-sm font-medium mb-1.5">Klasifikasi Surat</label><select id="fK" onchange="oKC()" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm font-semibold" style="border-color:var(--bd)"></select></div>
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Nomor Surat <span class="text-xs" style="color:var(--tm)">(otomatis)</span></label>
+                    <div class="relative"><i class="fas fa-hashtag absolute left-3 top-1/2 -translate-y-1/2" style="color:var(--tm)"></i><input type="text" id="fN" readonly class="fi2 w-full pl-10 pr-4 py-2.5 rounded-lg border text-sm font-semibold bg-gray-50" style="border-color:var(--bd)"></div>
+                    <div id="dbgInfo" class="dbg hidden"></div>
+                </div>
+                <div><label class="block text-sm font-medium mb-1.5">Tanggal Surat <span class="text-red-500">*</span></label><input type="date" id="fD" onchange="uNS()" required class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                <div id="fPr"><label class="block text-sm font-medium mb-1.5">Pengirim <span class="text-red-500">*</span></label><input type="text" id="fPr2" placeholder="Instansi/pengirim" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                <div id="fTj" class="hidden"><label class="block text-sm font-medium mb-1.5">Tujuan <span class="text-red-500">*</span></label><input type="text" id="fTj2" placeholder="Instansi/tujuan" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm" style="border-color:var(--bd)"></div>
+                <div><label class="block text-sm font-medium mb-1.5">Keterangan</label><textarea id="fKt" rows="2" placeholder="Catatan (opsional)" class="fi2 w-full px-4 py-2.5 rounded-lg border text-sm resize-none" style="border-color:var(--bd)"></textarea></div>
+                <div>
+                    <label class="block text-sm font-medium mb-1.5">Upload PDF</label>
+                    <div id="uA" class="ua rounded-lg p-5 text-center cursor-pointer" onclick="document.getElementById('fPD').click()"><i class="fas fa-cloud-upload-alt text-2xl mb-2" style="color:var(--tm)"></i><p class="text-sm" style="color:var(--tm)">Klik atau seret PDF</p><input type="file" id="fPD" accept="application/pdf" class="hidden" onchange="if(this.files[0])pFl(this.files[0])"></div>
+                    <div id="fI" class="hidden mt-2 flex items-center gap-2 p-2.5 rounded-lg" style="background:rgba(45,143,78,.06)"><i class="fas fa-file-pdf" style="color:var(--ng)"></i><span id="fNm" class="text-sm flex-1 truncate"></span><button type="button" onclick="rFl()" class="text-xs px-2 py-1 rounded hover:bg-red-50" style="color:var(--ng)"><i class="fas fa-times"></i></button></div>
+                </div>
+            </div>
+            
+            <!-- STICKY FOOTER -->
+            <div class="flex-shrink-0 bg-white border-t px-6 py-4 flex gap-3 z-20">
+                <button type="button" onclick="cm()" class="flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color:var(--bd)">Batal</button>
+                <button type="submit" id="bS" class="bp flex-1 px-5 py-2.5 rounded-lg font-semibold text-sm flex items-center justify-center gap-2"><i class="fas fa-save"></i>Simpan</button>
+            </div>
+            
+        </form>
+    </div>
+
     <div id="cD" class="fixed inset-0 z-[60] hidden"><div class="co absolute inset-0"></div><div class="relative z-10 w-full max-w-sm mx-auto mt-[30vh] bg-white rounded-2xl shadow-2xl p-6 as"><div class="text-center mb-5"><div class="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3" style="background:rgba(196,69,54,.1)"><i class="fas fa-trash-alt text-xl" style="color:var(--ng)"></i></div><h3 class="text-lg font-bold">Hapus Surat?</h3></div><div class="flex gap-3"><button onclick="ccD()" class="flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm border hover:bg-gray-50" style="border-color:var(--bd)">Batal</button><button id="bCD" class="bd flex-1 px-4 py-2.5 rounded-lg font-semibold text-sm">Hapus</button></div></div></div>
     <div id="tC2" class="fixed bottom-6 right-6 z-[70] space-y-2 max-w-sm"></div>
+
     <script>
     if(!String.prototype.replaceAll){String.prototype.replaceAll=function(s,r){return this.split(s).join(r)}}
-    const AK='e-arsip',AV='v7-dual-match-fix';
+    const AK='e-arsip',AV='v8-sticky-modal';
     let S={sM:[],sK:[],au:localStorage.getItem(AK+'-url')||'',fM:localStorage.getItem(AK+'-fmt-m')||'{no}/{kode}/{romawi}/{tahun}',fK:localStorage.getItem(AK+'-fmt-k')||'{no}/{kode}/{romawi}/{tahun}',kl:JSON.parse(localStorage.getItem(AK+'-klas')||JSON.stringify([{keyword:'undangan',code:'UND'},{keyword:'penugasan',code:'TGS'},{keyword:'sppd',code:'SPPD'},{keyword:'izin',code:'IZN'}])),cv:'dashboard',mt:null,sf:null,sfb:false,dt:null,mk:false};
 
-    // ========== LOAD & FIX DATA ==========
     function loadFix(){
         ['masuk','keluar'].forEach(t=>{
-            const raw=localStorage.getItem(AK+'-'+t)||'[]';
-            const dc=t==='masuk'?'SM':'SK';
-            let d;try{d=JSON.parse(raw)}catch(e){d=[]}
-            let fx=false;
+            const raw=localStorage.getItem(AK+'-'+t)||'[]';const dc=t==='masuk'?'SM':'SK';let d;try{d=JSON.parse(raw)}catch(e){d=[]}let fx=false;
             d.forEach(it=>{
-                // Fix nomorSurat literal {romawi}
                 if(it.nomorSurat&&it.nomorSurat.includes('{romawi}')){const p=String(it.tanggalSurat).split('-');const m=p.length===3?parseInt(p[1]):1;it.nomorSurat=it.nomorSurat.replaceAll('{romawi}',gR(m));fx=true}
-                // Fix klasifikasi: coba ekstrak dari nomorSurat dulu!
-                if(!it.klasifikasi||String(it.klasifikasi).trim()===''||String(it.klasifikasi)==='undefined'){
-                    // Coba ambil dari nomorSurat
-                    const extracted=extractCodeFromNomor(it.nomorSurat,dc);
-                    it.klasifikasi=extracted;
-                    fx=true;
-                }
-                // Uppercase
-                const orig=it.klasifikasi;
-                it.klasifikasi=String(it.klasifikasi).trim().toUpperCase();
-                if(it.klasifikasi!==orig)fx=true;
-                // Fix tanggal
+                if(!it.klasifikasi||String(it.klasifikasi).trim()===''||String(it.klasifikasi)==='undefined'){it.klasifikasi=eCN(it.nomorSurat,dc);fx=true}
+                const orig=it.klasifikasi;it.klasifikasi=String(it.klasifikasi).trim().toUpperCase();if(it.klasifikasi!==orig)fx=true;
                 if(!it.tanggalSurat||String(it.tanggalSurat).trim()===''){it.tanggalSurat=new Date().toISOString().split('T')[0];fx=true}
-                // Fix seqNum
                 if(!it.seqNum||it.seqNum<=0){if(it.nomorSurat){const m2=String(it.nomorSurat).match(/^(\d+)/);it.seqNum=m2?parseInt(m2[1]):1}else{it.seqNum=1}fx=true}
             });
-            if(t==='masuk')S.sM=d;else S.sK=d;
-            if(fx)sLD(t);
-        });
-        localStorage.setItem(AK+'-v',AV);
+            if(t==='masuk')S.sM=d;else S.sK=d;if(fx)sLD(t);
+        });localStorage.setItem(AK+'-v',AV);
     }
 
-    // ========== EKSTRAK KODE DARI NOMOR SURAT ==========
-    function extractCodeFromNomor(ns,dc){
-        if(!ns)return dc;
-        const segs=String(ns).split('/');
-        // Cek setiap segmen, cari yang cocok dengan klasifikasi yang dikenal
-        const allCodes=S.kl.map(k=>k.code.toUpperCase());
-        for(const seg of segs){
-            const s=seg.trim().toUpperCase();
-            if(allCodes.includes(s))return s;
-        }
-        // Jika tidak ketemu, cek apakah ada segmen selama angka, romawi, tahun, dan default
-        for(const seg of segs){
-            const s=seg.trim().toUpperCase();
-            if(s!==dc&&!/^\d+$/.test(s)&&!['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'].includes(s)&&s.length>=2&&s.length<=10){
-                return s; // Kemungkinan kode klasifikasi
-            }
-        }
-        return dc;
-    }
+    function eCN(ns,dc){if(!ns)return dc;const segs=String(ns).split('/');const ac=S.kl.map(k=>k.code.toUpperCase());for(const seg of segs){const s=seg.trim().toUpperCase();if(ac.includes(s))return s}for(const seg of segs){const s=seg.trim().toUpperCase();if(s!==dc&&!/^\d+$/.test(s)&&!['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'].includes(s)&&!/^\d{4}$/.test(s)&&s.length>=2&&s.length<=10)return s}return dc}
 
     const ASC=`var DRIVE_FOLDER_ID='GANTI_FOLDER_ID';\nfunction doGet(e){var ss=SpreadsheetApp.getActiveSpreadsheet();try{var a=e.parameter.action;if(a==='getMasuk')return r(g(ss,'Surat Masuk'));if(a==='getKeluar')return r(g(ss,'Surat Keluar'));if(a==='ping')return r({success:true});return r({success:false});}catch(e){return r({success:false,error:e.message});}}\nfunction doPost(e){try{var d=JSON.parse(e.postData.contents);var ss=SpreadsheetApp.getActiveSpreadsheet();var p='';if(d.pdfBase64&&d.pdfBase64.length>0)p=u(d.pdfBase64,d.nomorSurat);if(d.type==='masuk')ss.getSheetByName('Surat Masuk').appendRow([new Date(),d.nomorSurat,d.tanggalSurat,d.pengirim,d.perihal,d.klasifikasi,d.keterangan,p]);else ss.getSheetByName('Surat Keluar').appendRow([new Date(),d.nomorSurat,d.tanggalSurat,d.tujuan,d.perihal,d.klasifikasi,d.keterangan,p]);return r({success:true});}catch(e){return r({success:false,error:e.message});}}\nfunction r(d){return ContentService.createTextOutput(JSON.stringify(d)).setMimeType(ContentService.MimeType.JSON);}\nfunction g(ss,n){var sh=ss.getSheetByName(n);if(!sh)return{success:true,data:[]};var d=sh.getDataRange().getValues();if(d.length<=1)return{success:true,data:[]};var h=d[0],res=[];for(var i=1;i<d.length;i++){var o={};for(var j=0;j<h.length;j++){var v=d[i][j];if(v instanceof Date)v=Utilities.formatDate(v,'Asia/Jakarta','yyyy-MM-dd');o[h[j]]=v;}res.push(o);}return{success:true,data:res};}\nfunction u(b,n){try{var f=DriveApp.getFolderById(DRIVE_FOLDER_ID);var d=Utilities.base64Decode(b);var bl=Utilities.newBlob(d,'application/pdf',n.replace(/\\//g,'-')+'.pdf');var file=f.createFile(bl);file.setSharing(DriveApp.Access.ANYONE_WITH_LINK,DriveApp.Permission.VIEW);return file.getUrl();}catch(e){return'Error:'+e.message;}}\nfunction setupSheets(){var ss=SpreadsheetApp.getActiveSpreadsheet();var m=ss.getSheetByName('Surat Masuk');if(!m){m=ss.insertSheet('Surat Masuk');m.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Pengirim','Perihal','Klasifikasi','Keterangan','Link PDF']);m.getRange(1,1,1,8).setFontWeight('bold').setBackground('#16697A').setFontColor('#ffffff');}var k=ss.getSheetByName('Surat Keluar');if(!k){k=ss.insertSheet('Surat Keluar');k.appendRow(['Timestamp','Nomor Surat','Tanggal Surat','Tujuan','Perihal','Klasifikasi','Keterangan','Link PDF']);k.getRange(1,1,1,8).setFontWeight('bold').setBackground('#B8722D').setFontColor('#ffffff');}}`;
 
     function sv(v){S.cv=v;document.querySelectorAll('.view').forEach(e=>e.classList.add('hidden'));document.getElementById('view'+v[0].toUpperCase()+v.slice(1)).classList.remove('hidden');document.querySelectorAll('.tb').forEach(b=>b.classList.remove('act'));document.querySelector(`.tb[data-tab="${v}"]`).classList.add('act');if(v==='dashboard')rDb();else if(v==='masuk')rMT();else if(v==='keluar')rKT();else iPt()}
 
-    // ========== PENOMORAN: DUAL MATCH ==========
     function gR(m){return['I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII'][(m||1)-1]||'I'}
     function aTpl(t,n,c,y,m){return t.replaceAll('{no}',String(n).padStart(3,'0')).replaceAll('{kode}',c).replaceAll('{tahun}',String(y)).replaceAll('{bulan}',String(m).padStart(2,'0')).replaceAll('{romawi}',gR(m))}
     function pDP(d){if(!d)return{y:new Date().getFullYear(),m:new Date().getMonth()+1};const p=String(d).split('-');return p.length===3?{y:parseInt(p[0])||new Date().getFullYear(),m:parseInt(p[1])||new Date().getMonth()+1}:{y:new Date().getFullYear(),m:new Date().getMonth()+1}}
 
-    // Cek apakah sebuah item cocok dengan kode klasifikasi tertentu
-    // PENCOCOKAN GANDA: cek field klasifikasi DAN parse nomorSurat
-    function itemMatchesCode(item, targetCode, defCode){
-        // Method 1: Cek field klasifikasi
+    function iMC(item,tc,dc){
         const ik=(item.klasifikasi&&String(item.klasifikasi).trim()!=='')?String(item.klasifikasi).trim().toUpperCase():'';
-        if(ik===targetCode)return true;
-        
-        // Method 2: Parse nomorSurat — cari segmen yang cocok
-        if(item.nomorSurat){
-            const segs=String(item.nomorSurat).split('/');
-            for(const seg of segs){
-                if(seg.trim().toUpperCase()===targetCode)return true;
-            }
-        }
-        
-        // Method 3: Jika target=default dan item klasifikasi kosong, cek dari nomorSurat apakah default
-        if(targetCode===defCode&&ik===''){
-            // Cek apakah nomorSurat TIDAK mengandung klasifikasi lain
-            if(item.nomorSurat){
-                const segs=String(item.nomorSurat).split('/');
-                const allCodes=S.kl.map(k=>k.code.toUpperCase());
-                for(const seg of segs){
-                    if(allCodes.includes(seg.trim().toUpperCase())&&seg.trim().toUpperCase()!==defCode)return false;
-                }
-            }
-            return true;
-        }
-        
+        if(ik===tc)return true;
+        if(item.nomorSurat){const segs=String(item.nomorSurat).split('/');for(const seg of segs){if(seg.trim().toUpperCase()===tc)return true}}
+        if(tc===dc&&ik===''){if(item.nomorSurat){const segs=String(item.nomorSurat).split('/');const ac=S.kl.map(k=>k.code.toUpperCase());for(const seg of segs){if(ac.includes(seg.trim().toUpperCase())&&seg.trim().toUpperCase()!==dc)return false}}return true}
         return false;
     }
 
     function gNS(type,klasKode,tglSurat){
-        const data=type==='masuk'?S.sM:S.sK;
-        const tmpl=type==='masuk'?S.fM:S.fK;
-        const dc=type==='masuk'?'SM':'SK';
+        const data=type==='masuk'?S.sM:S.sK;const tmpl=type==='masuk'?S.fM:S.fK;const dc=type==='masuk'?'SM':'SK';
         const code=(klasKode&&String(klasKode).trim()!=='')?String(klasKode).trim().toUpperCase():dc;
-        const{y:yr,m:mo}=pDP(tglSurat);
-        let mx=0;
-        let matchCount=0;
-
-        for(let i=0;i<data.length;i++){
-            const it=data[i];
-            const id=pDP(it.tanggalSurat);
-            if(id.y!==yr||id.m!==mo)continue;
-
-            if(itemMatchesCode(it,code,dc)){
-                matchCount++;
-                let sq=0;
-                if(it.seqNum&&it.seqNum>0){sq=it.seqNum}
-                else if(it.nomorSurat){const m2=String(it.nomorSurat).match(/^(\d+)/);if(m2)sq=parseInt(m2[1])||0}
-                if(sq>mx)mx=sq;
-            }
-        }
-        const nx=mx+1;
-        const fmt=aTpl(tmpl,nx,code,yr,mo);
-        
-        // Debug info
-        const dbg=document.getElementById('dbgInfo');
-        if(dbg){
-            dbg.classList.remove('hidden');
-            dbg.innerHTML=`Klasifikasi: <strong>${code}</strong> | Bulan: ${mo}/${yr} | Ditemukan: ${matchCount} surat | Max urut: ${mx} | Next: <strong>${nx}</strong>`;
-        }
-        
-        console.log(`[E-Arsip] gNS: code=${code}, yr=${yr}, mo=${mo}, matches=${matchCount}, maxSeq=${mx}, next=${nx} => "${fmt}"`);
+        const{y:yr,m:mo}=pDP(tglSurat);let mx=0,mc=0;
+        for(let i=0;i<data.length;i++){const it=data[i];const id=pDP(it.tanggalSurat);if(id.y!==yr||id.m!==mo)continue;
+            if(iMC(it,code,dc)){mc++;let sq=0;if(it.seqNum&&it.seqNum>0){sq=it.seqNum}else if(it.nomorSurat){const m2=String(it.nomorSurat).match(/^(\d+)/);if(m2)sq=parseInt(m2[1])||0}if(sq>mx)mx=sq}}
+        const nx=mx+1;const fmt=aTpl(tmpl,nx,code,yr,mo);
+        const dbg=document.getElementById('dbgInfo');if(dbg){dbg.classList.remove('hidden');dbg.innerHTML=`Klasifikasi: <strong>${code}</strong> | Bulan: ${mo}/${yr} | Ditemukan: ${mc} surat | Max urut: ${mx} | Next: <strong>${nx}</strong>`}
         return{formatted:fmt,seqNum:nx};
     }
 
-    function hPC(){
-        const p=document.getElementById('fP').value.toLowerCase();
-        let mc='';
-        for(const k of S.kl){if(p.includes(k.keyword.toLowerCase())){mc=k.code;break}}
-        if(mc){document.getElementById('fK').value=mc;S.mk=false}
-        uNS();
-    }
+    function hPC(){const p=document.getElementById('fP').value.toLowerCase();let mc='';for(const k of S.kl){if(p.includes(k.keyword.toLowerCase())){mc=k.code;break}}if(mc){document.getElementById('fK').value=mc;S.mk=false}uNS()}
     function oKC(){S.mk=true;uNS()}
     function uNS(){if(!S.mt)return;const k=document.getElementById('fK').value;const d=document.getElementById('fD').value;const r=gNS(S.mt,k,d);document.getElementById('fN').value=r.formatted}
-    function pKD(){
-        const sel=document.getElementById('fK');const dc=S.mt==='masuk'?'SM':'SK';
-        sel.innerHTML=`<option value="">Default (${dc})</option>`;
-        S.kl.forEach(k=>{sel.innerHTML+=`<option value="${k.code}">${k.code} — ${cap(k.keyword)}</option>`});
-    }
+    function pKD(){const sel=document.getElementById('fK');const dc=S.mt==='masuk'?'SM':'SK';sel.innerHTML=`<option value="">Default (${dc})</option>`;S.kl.forEach(k=>{sel.innerHTML+=`<option value="${k.code}">${k.code} — ${cap(k.keyword)}</option>`})}
 
     function cap(s){return s?s[0].toUpperCase()+s.slice(1):''}
     function sLD(t){localStorage.setItem(AK+'-'+t,JSON.stringify(t==='masuk'?S.sM:S.sK))}
@@ -265,8 +210,7 @@
         ev.preventDefault();const type=S.mt,btn=document.getElementById('bS');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Menyimpan...';
         try{
             const tgl=document.getElementById('fD').value,prh=document.getElementById('fP').value,ket=document.getElementById('fKt').value;
-            const dc=type==='masuk'?'SM':'SK';
-            const rawK=document.getElementById('fK').value;
+            const dc=type==='masuk'?'SM':'SK';const rawK=document.getElementById('fK').value;
             const ek=(rawK&&String(rawK).trim()!=='')?String(rawK).trim().toUpperCase():dc;
             const nr=gNS(type,ek,tgl);
             if(type==='masuk'){
